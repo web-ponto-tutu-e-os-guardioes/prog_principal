@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .data-hora {
     text-align: center;
     font-family: "Nanum Gothic Coding", monospace;
