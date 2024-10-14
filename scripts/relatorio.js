@@ -23,7 +23,7 @@ function renderList() {
         divRegistro.classList.add('registro-item');
 
         const dataElement = document.createElement('p');
-        dataElement.innerHTML = `<a href="#" class="toggle-details">${date}</a>`;
+        dataElement.innerHTML = `<a href="#" class="toggle-details"> > ${date}</a>`;
         divRegistro.appendChild(dataElement);
 
         const detailsDiv = document.createElement('div');
