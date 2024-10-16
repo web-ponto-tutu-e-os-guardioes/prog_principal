@@ -39,9 +39,22 @@ function renderList() {
                 <p>Observações: ${register.obs || 'Nenhuma'}</p>
                 <button class="editar">Editar</button>
                 <button class="excluir">Excluir</button>
+                <div class="alerta-excluir" style="display:none; color:red; margin-top: 10px;"></div>
                 <hr>
             `;
             detailsDiv.appendChild(detalheRegistro);
+
+            const excluirButton = detalheRegistro.querySelector('.excluir');
+            const alertMessage = detalheRegistro.querySelector('.alerta-excluir');
+
+            excluirButton.addEventListener('click', () => {
+                alertMessage.textContent = "Não é possível excluir este registro.";
+                alertMessage.style.display = 'block';
+
+                setTimeout(() => {
+                    alertMessage.style.display = 'none';
+                }, 5000);
+            });
         });
 
         divRegistro.appendChild(detailsDiv);
