@@ -6,7 +6,7 @@ const diaMesAno = document.getElementById("dia-mes-ano");
 const horaMinSeg = document.getElementById("hora-min-seg");
 
 const btnBaterPontoPass = document.getElementById("btn-bater-ponto-pass");
-btnBaterPontoPass.addEventListener("click", register);
+btnBaterPontoPass.addEventListener("click", registerPass);
 
 const btnBaterPonto = document.getElementById("btn-bater-ponto");
 btnBaterPonto.addEventListener("click", register);
@@ -30,6 +30,9 @@ let registerLocalStorage = getRegisterLocalStorage();
 
 const dialogData = document.getElementById("dialog-data");
 const dialogHora = document.getElementById("dialog-hora");
+const dialogHoraPass = document.getElementById("dialog-hora-pass");
+const dialogDataPassada = document.getElementById("dialog-data-pass");
+
 
 const divAlertaRegistroPonto = document.getElementById("alerta-registro-ponto");
 
@@ -96,42 +99,6 @@ btnDialogBaterPonto.addEventListener("click", async () => {
 
 });
 
-const btnDialogBaterPontoPass = document.getElementById("btn-dialog-bater-ponto");
-btnDialogBaterPonto.addEventListener("click", async () => {
-    const typeRegister = document.getElementById("tipos-ponto");
-    let lastTypeRegister = localStorage.getItem("lastTypeRegister");
-
-    console.log(lastTypeRegister);
-
-    let userCurrentPosition = await getCurrentPosition();
-
-    let ponto = {
-        "data": getCurrentDate(),
-        "hora": getCurrentHour(),
-        "localizacao": userCurrentPosition,
-        "id": 1,
-        "tipo": typeRegister.value
-    }
-
-    console.log(ponto);
-
-    saveRegisterLocalStorage(ponto);
-
-    localStorage.setItem("lastDateRegister", ponto.data);
-    localStorage.setItem("lastTimeRegister", ponto.hora);
-
-    dialogPonto.close();
-
-    divAlertaRegistroPonto.classList.remove("hidden");
-    divAlertaRegistroPonto.classList.add("show");
-
-    setTimeout(() => {
-        divAlertaRegistroPonto.classList.remove("show");
-        divAlertaRegistroPonto.classList.add("hidden");
-    }, 5000);
-
-});
-
 function saveRegisterLocalStorage(register) {
     const typeRegister = document.getElementById("tipos-ponto");
     registerLocalStorage.push(register); // Array
@@ -154,6 +121,29 @@ function getRegisterLocalStorage() {
 function register() {
     dialogData.textContent = "Data: " + getCurrentDate();
     dialogHora.textContent = "Hora: " + getCurrentHour();
+    
+    let lastTypeRegister = localStorage.getItem("lastTypeRegister");
+    if(lastTypeRegister) {
+        const typeRegister   = document.getElementById("tipos-ponto");
+        typeRegister.value   = nextRegister[lastTypeRegister];
+        let lastRegisterText = "Último registro: " + localStorage.getItem("lastDateRegister") + " - " + localStorage.getItem("lastTimeRegister") + " | " + localStorage.getItem("lastTypeRegister")
+        document.getElementById("dialog-last-register").textContent = lastRegisterText;
+    }
+
+    // TO-DO
+    // Como "matar" o intervalo a cada vez que o dialog é fechado?
+    setInterval(() => {
+        dialogHora.textContent = "Hora: " + getCurrentHour();
+    }, 1000);
+
+    dialogPonto.showModal();
+}
+
+function registerPass() {
+    dialogDataPass.textContent = "Data Atual: " + getCurrentDate();
+    dialogHoraPass.textContent = "Hora: " + getCurrentHour();
+    dialogDataPassada.textContent = "Data Passada: " + getCurrentDate();
+
     
     let lastTypeRegister = localStorage.getItem("lastTypeRegister");
     if(lastTypeRegister) {
