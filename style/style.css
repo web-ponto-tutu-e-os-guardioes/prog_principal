@@ -55,7 +55,7 @@
     text-align: center;
 }
 
-#btn-bater-ponto {
+#btn-bater-ponto, #btn-bater-ponto-pass {
     padding: 20px;
     background-color: blue;
     color: white;

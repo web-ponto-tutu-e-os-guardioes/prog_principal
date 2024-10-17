@@ -5,10 +5,14 @@ const diaSemana = document.getElementById("dia-semana");
 const diaMesAno = document.getElementById("dia-mes-ano");
 const horaMinSeg = document.getElementById("hora-min-seg");
 
+const btnBaterPontoPass = document.getElementById("btn-bater-ponto-pass");
+btnBaterPontoPass.addEventListener("click", register);
+
 const btnBaterPonto = document.getElementById("btn-bater-ponto");
 btnBaterPonto.addEventListener("click", register);
 
 const dialogPonto = document.getElementById("dialog-ponto");
+const dialogPontoPass = document.getElementById("dialog-ponto-pass")
 
 const btnDialogFechar = document.getElementById("btn-dialog-fechar");
 btnDialogFechar.addEventListener("click", () => {
@@ -57,6 +61,42 @@ btnCloseAlertRegister.addEventListener("click", () => {
 });
 
 const btnDialogBaterPonto = document.getElementById("btn-dialog-bater-ponto");
+btnDialogBaterPonto.addEventListener("click", async () => {
+    const typeRegister = document.getElementById("tipos-ponto");
+    let lastTypeRegister = localStorage.getItem("lastTypeRegister");
+
+    console.log(lastTypeRegister);
+
+    let userCurrentPosition = await getCurrentPosition();
+
+    let ponto = {
+        "data": getCurrentDate(),
+        "hora": getCurrentHour(),
+        "localizacao": userCurrentPosition,
+        "id": 1,
+        "tipo": typeRegister.value
+    }
+
+    console.log(ponto);
+
+    saveRegisterLocalStorage(ponto);
+
+    localStorage.setItem("lastDateRegister", ponto.data);
+    localStorage.setItem("lastTimeRegister", ponto.hora);
+
+    dialogPonto.close();
+
+    divAlertaRegistroPonto.classList.remove("hidden");
+    divAlertaRegistroPonto.classList.add("show");
+
+    setTimeout(() => {
+        divAlertaRegistroPonto.classList.remove("show");
+        divAlertaRegistroPonto.classList.add("hidden");
+    }, 5000);
+
+});
+
+const btnDialogBaterPontoPass = document.getElementById("btn-dialog-bater-ponto");
 btnDialogBaterPonto.addEventListener("click", async () => {
     const typeRegister = document.getElementById("tipos-ponto");
     let lastTypeRegister = localStorage.getItem("lastTypeRegister");
