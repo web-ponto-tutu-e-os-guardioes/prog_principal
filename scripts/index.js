@@ -99,6 +99,54 @@ btnDialogBaterPonto.addEventListener("click", async () => {
 
 });
 
+btnDialogBaterPontoPass.addEventListener("click", () => {
+    const inputData = document.getElementById("data").value;  // Data escolhida
+    const currentDate = new Date();
+    const chosenDate = new Date(inputData);
+
+    if (chosenDate > currentDate) {
+        alert("Não é possível registrar ponto em uma data futura!");
+        return;
+    }
+
+    if (chosenDate <= currentDate) {
+        // Aqui você salva o ponto no localStorage com uma marcação diferenciada
+        let pontoPassado = {
+            "data": inputData,
+            "hora": getCurrentHour(),
+            "localizacao": userCurrentPosition,
+            "id": 1,
+            "tipo": typeRegister.value,
+            "isPastRegister": true // Marcação diferenciada para registro no passado
+        };
+
+        saveRegisterLocalStorage(pontoPassado);
+        dialogPontoPass.close();
+
+        divAlertaRegistroPonto.classList.remove("hidden");
+        divAlertaRegistroPonto.classList.add("show");
+
+        setTimeout(() => {
+            divAlertaRegistroPonto.classList.remove("show");
+            divAlertaRegistroPonto.classList.add("hidden");
+        }, 5000);
+    }
+});
+
+function generateReport() {
+    let registros = getRegisterLocalStorage();
+
+    registros.forEach((registro) => {
+        if (registro.isPastRegister) {
+            console.log("Registro no passado: ", registro);
+            // Aqui você pode estilizar o registro no relatório com uma classe especial
+        } else {
+            console.log("Registro normal: ", registro);
+        }
+    });
+}
+
+
 function saveRegisterLocalStorage(register) {
     const typeRegister = document.getElementById("tipos-ponto");
     registerLocalStorage.push(register); // Array
