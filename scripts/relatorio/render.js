@@ -78,6 +78,9 @@ export function renderList() {
 
             setupEdit(detalheRegistro, register, index, renderList);
             setupDelete(detalheRegistro);
+
+            
+
         });
 
         divRegistro.appendChild(detailsDiv);
