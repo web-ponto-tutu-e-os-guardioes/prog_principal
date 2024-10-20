@@ -54,7 +54,7 @@ export function renderList() {
                     <p><strong>Tipo:</strong> ${register.tipo}</p>
                     <p><strong>Horário:</strong> ${register.hora || 'Horário não registrado'}</p>
 
-                    <details open>
+                    <details>
                         <summary> <strong> Localização </strong> </summary>
                         <p><strong>Latitude:</strong> ${register.localizacao.latitude || 'Não possui latitude'}</p>
                         <p><strong>Longitude:</strong> ${register.localizacao.longitude || 'Não possui longitude'}</p>
