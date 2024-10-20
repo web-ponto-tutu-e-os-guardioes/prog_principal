@@ -1,3 +1,5 @@
+@import url('./components/header.css');
+
 * {
     margin: 0;
     padding: 0;
@@ -36,6 +38,7 @@ a {
 
 .registro-item{
     border-style: double;
+    margin: 0px 20px 0px 20px;
 }
 
 .registros-ponto {

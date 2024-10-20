@@ -7,11 +7,26 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="calendario/style.css" />
     <script src="calendario/script.js" defer></script>
 </head>
 <body>
+
+    <header>
+      <div class="logo">
+        <a href="index.html">
+          <img src="./style/assets/logoPontModerno.png" alt="Logo do Ponto Eletrônico">
+        </a>
+          <span class="header-title">Ponto Eletrônico</span>
+      </div>
+      <div class="header-right">
+          <button onclick="window.location.href='./relatorio.html'" class="history-button">Relatório</button>
+          <div class="user-circle">
+              <img src="./style/assets/tutu_e_sanderson.jpg" alt="Foto do usuário">
+          </div>
+        </div>
+    </header>
+
     <!-- Alerta de ponto registrado -->
     <div id="alerta-registro-ponto" class="hidden">
         <p>Ponto registrado com sucesso!</p>
@@ -27,8 +42,7 @@
 
     <!-- Botões para registrar ponto -->
     <div id="div-btn-bater-ponto">
-        <button id="btn-bater-ponto">Bater ponto!</button>
-        <button id="btn-bater-ponto-pass">Bater ponto no passado!</button>
+        <button id="btn-bater-ponto">Bater ponto</button>
     </div>
 
     <!-- Diálogo para registrar ponto atual -->
@@ -49,6 +63,13 @@
         </div>
     </dialog>
 
+    <div id="outros-botoes">
+
+      <button onclick="window.location.href='./relatorio.html'" id="relatorioButton">Mostrar relatório</button>
+      <button id="btn-bater-ponto-pass">Bater ponto no passado</button>
+  
+    </div>
+
     <!-- Diálogo para registrar ponto no passado -->
     <dialog id="dialog-ponto-pass">
         <p id="dialog-data-pass">Data Atual: </p>
@@ -65,9 +86,6 @@
         <p id="dialog-last-register-pass"></p>
         <button id="btn-dialog-fechar-pass">Fechar</button>
     </dialog>
-
-    <!-- Botão para relatório -->
-    <button onclick="window.location.href='./pages/relatorio.html'" id="relatorioButton">Mostrar relatório</button>
 
     <!-- Script JavaScript -->
     <script src="scripts/index.js"></script>

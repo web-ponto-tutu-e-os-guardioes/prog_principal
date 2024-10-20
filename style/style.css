@@ -1,3 +1,11 @@
+@import url('./components/header.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:root {
+    --fonte-poppins: "Poppins", sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +17,9 @@
     font-family: "Nanum Gothic Coding", monospace;
     font-weight: 400;
     font-style: normal;
+    padding: 50px;
 }
+
 
 #btn-dialog-fechar {
     position: absolute;
@@ -23,6 +33,12 @@
     right: 20px;
     background-color: green;
     padding: 20px;
+}
+
+.data-hora p {
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    font-family: var(--fonte-poppins);
 }
 
 #alerta-registro-ponto p {
@@ -55,16 +71,24 @@
     text-align: center;
 }
 
+#div-btn-bater-ponto button {
+    border-radius: 20px;
+    padding: 30px;
+    font-family: var(--fonte-poppins);
+    font-size: 23px;
+    cursor: pointer;
+}
+
+#div-btn-bater-ponto:hover {
+    transform: scale(1.1);
+}
+
 #btn-bater-ponto, #btn-bater-ponto-pass, #relatorioButton {
     padding: 20px;
     background-color: blue;
     color: white;
     font-size: 1.3rem;
     border: 0px;
-}
-
-.data-hora p {
-    font-size: 2rem; 
 }
 
 #dialog-ponto p {
@@ -90,4 +114,16 @@
   width: 100%;
   padding: 10px;
   font-size: 1rem;
+}
+
+#outros-botoes {
+    align-self: center;
+    margin-top: 40px;
+}
+
+#outros-botoes button{
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 12px;
+    cursor: pointer;
 }
