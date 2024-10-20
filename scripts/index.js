@@ -5,6 +5,7 @@ const horaMinSeg = document.getElementById("hora-min-seg");
 
 const btnBaterPontoPass = document.getElementById("btn-bater-ponto-pass");
 const btnDialogBaterPonto = document.getElementById("btn-dialog-bater-ponto");
+const btnDialogBaterPontoPass = document.getElementById("btn-dialog-bater-ponto-pass");
 const btnDialogFechar = document.getElementById("btn-dialog-fechar");
 const btnDialogFecharPass = document.getElementById("btn-dialog-fechar-pass");
 const btnCloseAlertRegister = document.getElementById("alerta-registro-ponto-fechar");
@@ -17,7 +18,6 @@ const dialogHora = document.getElementById("dialog-hora");
 const dialogHoraPass = document.getElementById("dialog-hora-pass");
 const dialogDataPassada = document.getElementById("dialog-data-pass");
 const btnBaterPonto = document.getElementById("btn-bater-ponto");
-
 
 let registerLocalStorage = getRegisterLocalStorage();
 
@@ -32,6 +32,7 @@ btnBaterPontoPass.addEventListener("click", () => {
     dialogPontoPass.showModal(); // Para abrir o diálogo como modal
 });
 btnDialogBaterPonto.addEventListener("click", handleRegister);
+btnDialogBaterPontoPass.addEventListener("click", handleRegister)
 btnDialogFechar.addEventListener("click", () => dialogPonto.close());
 btnDialogFecharPass.addEventListener("click", () => dialogPontoPass.close());
 btnCloseAlertRegister.addEventListener("click", closeAlert);
