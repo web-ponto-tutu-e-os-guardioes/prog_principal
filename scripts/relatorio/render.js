@@ -44,16 +44,27 @@ export function renderList() {
         const detailsDiv = document.createElement('div');
         detailsDiv.classList.add('details');
         detailsDiv.style.display = 'none';
-
+        
         registrosPorData[date].forEach((register, index) => {
+            const link = `https://www.google.com/maps?q=${register.localizacao.latitude},${register.localizacao.longitude}`;
             const detalheRegistro = document.createElement('div');
             detalheRegistro.classList.add('registro-detalhe');
             detalheRegistro.innerHTML = `
                 <div id="conteudo">
                     <p><strong>Tipo:</strong> ${register.tipo}</p>
                     <p><strong>Horário:</strong> ${register.hora || 'Horário não registrado'}</p>
-                    <p><strong>Latitude:</strong> ${register.localizacao.latitude || 'Não possui latitude'}</p>
-                    <p><strong>Longitude:</strong> ${register.localizacao.longitude || 'Não possui longitude'}</p>
+
+                    <details>
+                        <summary> <strong> Overview </strong> </summary>
+                        <ol>
+
+                        <p><strong>Latitude:</strong> ${register.localizacao.latitude || 'Não possui latitude'}</p>
+                        <p><strong>Longitude:</strong> ${register.localizacao.longitude || 'Não possui longitude'}</p>
+                        <a href="${link}" target="_blank"> Abrir localização no Google Maps</a>  
+                         
+                        </ol>
+                    </details>
+
                     <p><strong>Observações:</strong> ${register.obs || 'Sem observações'}</p>
                 </div>
                 <div>
