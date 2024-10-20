@@ -33,7 +33,7 @@ export function renderList() {
         return dataB - dataA;
     });
 
-    datasOrdenadas.forEach(date => {
+    datasOrdenadas.forEach(date => { 
         const divRegistro = document.createElement('div');
         divRegistro.classList.add('registro-item');
 
@@ -50,20 +50,18 @@ export function renderList() {
             const detalheRegistro = document.createElement('div');
             detalheRegistro.classList.add('registro-detalhe');
             detalheRegistro.innerHTML = `
-                <div id="conteudo">
+                <div id="conteudo-${index}">
                     <p><strong>Tipo:</strong> ${register.tipo}</p>
                     <p><strong>Horário:</strong> ${register.hora || 'Horário não registrado'}</p>
 
-                    <details>
-                        <summary> <strong> Overview </strong> </summary>
-                        <ol>
-
+                    <details open>
+                        <summary> <strong> Localização </strong> </summary>
                         <p><strong>Latitude:</strong> ${register.localizacao.latitude || 'Não possui latitude'}</p>
                         <p><strong>Longitude:</strong> ${register.localizacao.longitude || 'Não possui longitude'}</p>
-                        <a href="${link}" target="_blank"> Abrir localização no Google Maps</a>  
-                         
-                        </ol>
-                    </details>
+                        <br>
+                        <a href="${link}" target="_blank">Abrir localização no Google Maps</a>
+                        <div id="map-${index}" class="map" style="height: 200px;"></div>   
+                        </details>
 
                     <p><strong>Observações:</strong> ${register.obs || 'Sem observações'}</p>
                 </div>
@@ -73,11 +71,26 @@ export function renderList() {
                 </div>
                 <p class="alert-message" style="display:none; color:red; margin-top: 10px;"></p>
             `;
-
+            
             detailsDiv.appendChild(detalheRegistro);
 
             setupEdit(detalheRegistro, register, index, renderList);
             setupDelete(detalheRegistro);
+
+            // Inicializar o mapa quando a localização for visualizada
+            const detailsElement = detalheRegistro.querySelector('details');
+            detailsElement.addEventListener('toggle', function() {
+                if (detailsElement.open) {
+                    const mapDiv = detalheRegistro.querySelector(`#map-${index}`);
+                    const map = L.map(mapDiv).setView([register.localizacao.latitude, register.localizacao.longitude], 13);
+                    
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    L.marker([register.localizacao.latitude, register.localizacao.longitude]).addTo(map);
+                }
+            });
         });
 
         divRegistro.appendChild(detailsDiv);
