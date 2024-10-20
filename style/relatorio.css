@@ -20,7 +20,7 @@ h1 {
 
 p {
     font-size: 25px;
-    margin: 20px 50px;
+    margin: 20px 10px;
 }
 
 a {
@@ -33,13 +33,38 @@ a {
     margin-left: 90px;
 }
 
+
+.registro-item{
+    border-style: double;
+}
+
+.registros-ponto {
+    margin: 20px 30px;
+}
+
+.toggle-details {
+    color: black;
+    text-decoration: none;
+}
+
 .registro-detalhe {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     margin-bottom: 15px;
+    
+    padding: 10px;
     padding-right: 10px;
+
+    
+    border-style: ridge;
+    border-width: 15px;
+    border-color: gray;
+
+    font-size: 1.3rem;
+    line-height: 40px;
 }
 
 .registro-detalhe p {
@@ -50,4 +75,39 @@ a {
 button {
     padding: 5px;
     cursor: pointer;
+}
+
+.map {
+    width: 100%;
+    height: 200px;
+    margin-top: 10px;
+}
+
+.registro-details-latitude, .registro-details-longitude {
+    padding-left: 5px;
+}
+
+details[open] {
+    padding: 15px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.details-localização[open] .map {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: darkslategray;
+}
+
+details[open] summary {
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+details[open] p {
+    margin: 5px 0;
 }

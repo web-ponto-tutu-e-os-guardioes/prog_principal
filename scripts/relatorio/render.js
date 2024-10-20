@@ -42,7 +42,7 @@ export function renderList() {
         divRegistro.appendChild(dataElement);
 
         const detailsDiv = document.createElement('div');
-        detailsDiv.classList.add('details');
+        detailsDiv.classList.add('registros-ponto');
         detailsDiv.style.display = 'none';
         
         registrosPorData[date].forEach((register, index) => {
@@ -54,14 +54,16 @@ export function renderList() {
                     <p><strong>Tipo:</strong> ${register.tipo}</p>
                     <p><strong>Horário:</strong> ${register.hora || 'Horário não registrado'}</p>
 
-                    <details>
-                        <summary> <strong> Localização </strong> </summary>
-                        <p><strong>Latitude:</strong> ${register.localizacao.latitude || 'Não possui latitude'}</p>
-                        <p><strong>Longitude:</strong> ${register.localizacao.longitude || 'Não possui longitude'}</p>
+                    <details class="details-localização">
+                    <summary><strong> Localização </strong></summary>
+
+                    <div class="details-content">
+                        <p class="registro-details-latitude"><strong>Latitude:</strong> ${register.localizacao.latitude || 'Não possui latitude'}</p>
+                        <p class="registro-details-longitude"><strong>Longitude:</strong> ${register.localizacao.longitude || 'Não possui longitude'}</p>
                         <br>
                         <a href="${link}" target="_blank">Abrir localização no Google Maps</a>
-                        <div id="map-${index}" class="map" style="height: 200px;"></div>   
-                        </details>
+                        <div id="map-${index}" class="map" style="height: 200px;"></div>  
+                    </details>
 
                     <p><strong>Observações:</strong> ${register.obs || 'Sem observações'}</p>
                 </div>
@@ -77,7 +79,6 @@ export function renderList() {
             setupEdit(detalheRegistro, register, index, renderList);
             setupDelete(detalheRegistro);
 
-            // Inicializar o mapa quando a localização for visualizada
             const detailsElement = detalheRegistro.querySelector('details');
             detailsElement.addEventListener('toggle', function() {
                 if (detailsElement.open) {
