@@ -51,6 +51,7 @@ const nextRegister = {
 // Funções principais
 async function handleRegister() {
     const typeRegister = document.getElementById("tipos-ponto");
+    let inputObservacao = document.getElementById("input-observacao");
     let userCurrentPosition = await getCurrentPosition();
 
     let ponto = {
@@ -58,12 +59,15 @@ async function handleRegister() {
         "hora": getCurrentHour(),
         "localizacao": userCurrentPosition,
         "id": 1,
-        "tipo": typeRegister.value
+        "tipo": typeRegister.value,
+        "obs": inputObservacao.value
     };
 
     saveRegisterLocalStorage(ponto);
     updateLastRegisterInfo(ponto);
     showAlert();
+
+    inputObservacao.value = "";
 }
 
 function handlePastRegister() {
@@ -82,7 +86,8 @@ function handlePastRegister() {
         "localizacao": userCurrentPosition,
         "id": 1,
         "tipo": typeRegister.value,
-        "isPastRegister": true
+        "isPastRegister": true,
+        "obs": inputObservacao.value
     };
 
     saveRegisterLocalStorage(pontoPassado);

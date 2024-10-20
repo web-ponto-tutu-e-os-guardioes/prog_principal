@@ -81,3 +81,13 @@
     padding: 20px;
     font-size: 1.3rem;
 }
+
+.div-input-observacao {
+  margin: 5px;
+}
+
+.input-observacao {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+}
