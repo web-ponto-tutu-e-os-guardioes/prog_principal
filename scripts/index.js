@@ -1,75 +1,55 @@
-// TO-DO:
-// Organizar código-fonte
-
+// Elementos do DOM
 const diaSemana = document.getElementById("dia-semana");
 const diaMesAno = document.getElementById("dia-mes-ano");
 const horaMinSeg = document.getElementById("hora-min-seg");
 
 const btnBaterPontoPass = document.getElementById("btn-bater-ponto-pass");
-btnBaterPontoPass.addEventListener("click", registerPass);
-
-const btnBaterPonto = document.getElementById("btn-bater-ponto");
-btnBaterPonto.addEventListener("click", register);
-
-const dialogPonto = document.getElementById("dialog-ponto");
-const dialogPontoPass = document.getElementById("dialog-ponto-pass")
-
+const btnDialogBaterPonto = document.getElementById("btn-dialog-bater-ponto");
 const btnDialogFechar = document.getElementById("btn-dialog-fechar");
-btnDialogFechar.addEventListener("click", () => {
-    dialogPonto.close();
+const btnDialogFecharPass = document.getElementById("btn-dialog-fechar-pass");
+const btnCloseAlertRegister = document.getElementById("alerta-registro-ponto-fechar");
+
+const divAlertaRegistroPonto = document.getElementById("alerta-registro-ponto");
+const dialogPonto = document.getElementById("dialog-ponto");
+const dialogPontoPass = document.getElementById("dialog-ponto-pass");
+const dialogData = document.getElementById("dialog-data");
+const dialogHora = document.getElementById("dialog-hora");
+const dialogHoraPass = document.getElementById("dialog-hora-pass");
+const dialogDataPassada = document.getElementById("dialog-data-pass");
+const btnBaterPonto = document.getElementById("btn-bater-ponto");
+
+
+let registerLocalStorage = getRegisterLocalStorage();
+
+// Exibir informações iniciais
+diaSemana.textContent = getWeekDay();
+diaMesAno.textContent = getCurrentDate();
+printCurrentHour();
+setInterval(printCurrentHour, 1000);
+
+// Adicionar eventos aos botões
+btnBaterPontoPass.addEventListener("click", () => {
+    dialogPontoPass.showModal(); // Para abrir o diálogo como modal
+});
+btnDialogBaterPonto.addEventListener("click", handleRegister);
+btnDialogFechar.addEventListener("click", () => dialogPonto.close());
+btnDialogFecharPass.addEventListener("click", () => dialogPontoPass.close());
+btnCloseAlertRegister.addEventListener("click", closeAlert);
+btnBaterPonto.addEventListener("click", () => {
+    dialogPonto.showModal(); // Para abrir o diálogo como modal
 });
 
+// Mapeamento dos tipos de registro
 const nextRegister = {
     "entrada": "intervalo",
     "intervalo": "volta-intervalo", 
     "volta-intervalo": "saida", 
     "saida": "entrada"
-}
+};
 
-let registerLocalStorage = getRegisterLocalStorage();
-
-const dialogData = document.getElementById("dialog-data");
-const dialogHora = document.getElementById("dialog-hora");
-const dialogHoraPass = document.getElementById("dialog-hora-pass");
-const dialogDataPassada = document.getElementById("dialog-data-pass");
-
-
-const divAlertaRegistroPonto = document.getElementById("alerta-registro-ponto");
-
-diaSemana.textContent = getWeekDay();
-diaMesAno.textContent = getCurrentDate();
-
-
-async function getCurrentPosition() {
-    return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            let userLocation = {
-                "latitude": position.coords.latitude,
-                "longitude": position.coords.longitude
-            }
-            resolve(userLocation);
-        },
-        (error) => {
-            reject("Erro ao recuperar a localização " + error);
-        });
-    });
-}
-
-// TO-DO:
-// Problema: os 5 segundos continuam contando
-const btnCloseAlertRegister = document.getElementById("alerta-registro-ponto-fechar");
-btnCloseAlertRegister.addEventListener("click", () => {
-    divAlertaRegistroPonto.classList.remove("show");
-    divAlertaRegistroPonto.classList.add("hidden");
-});
-
-const btnDialogBaterPonto = document.getElementById("btn-dialog-bater-ponto");
-btnDialogBaterPonto.addEventListener("click", async () => {
+// Funções principais
+async function handleRegister() {
     const typeRegister = document.getElementById("tipos-ponto");
-    let lastTypeRegister = localStorage.getItem("lastTypeRegister");
-
-    console.log(lastTypeRegister);
-
     let userCurrentPosition = await getCurrentPosition();
 
     let ponto = {
@@ -78,29 +58,15 @@ btnDialogBaterPonto.addEventListener("click", async () => {
         "localizacao": userCurrentPosition,
         "id": 1,
         "tipo": typeRegister.value
-    }
-
-    console.log(ponto);
+    };
 
     saveRegisterLocalStorage(ponto);
+    updateLastRegisterInfo(ponto);
+    showAlert();
+}
 
-    localStorage.setItem("lastDateRegister", ponto.data);
-    localStorage.setItem("lastTimeRegister", ponto.hora);
-
-    dialogPonto.close();
-
-    divAlertaRegistroPonto.classList.remove("hidden");
-    divAlertaRegistroPonto.classList.add("show");
-
-    setTimeout(() => {
-        divAlertaRegistroPonto.classList.remove("show");
-        divAlertaRegistroPonto.classList.add("hidden");
-    }, 5000);
-
-});
-
-btnDialogBaterPontoPass.addEventListener("click", () => {
-    const inputData = document.getElementById("data").value;  // Data escolhida
+function handlePastRegister() {
+    const inputData = document.getElementById("data").value;
     const currentDate = new Date();
     const chosenDate = new Date(inputData);
 
@@ -109,126 +75,79 @@ btnDialogBaterPontoPass.addEventListener("click", () => {
         return;
     }
 
-    if (chosenDate <= currentDate) {
-        // Aqui você salva o ponto no localStorage com uma marcação diferenciada
-        let pontoPassado = {
-            "data": inputData,
-            "hora": getCurrentHour(),
-            "localizacao": userCurrentPosition,
-            "id": 1,
-            "tipo": typeRegister.value,
-            "isPastRegister": true // Marcação diferenciada para registro no passado
-        };
+    let pontoPassado = {
+        "data": inputData,
+        "hora": getCurrentHour(),
+        "localizacao": userCurrentPosition,
+        "id": 1,
+        "tipo": typeRegister.value,
+        "isPastRegister": true
+    };
 
-        saveRegisterLocalStorage(pontoPassado);
-        dialogPontoPass.close();
+    saveRegisterLocalStorage(pontoPassado);
+    dialogPontoPass.close();
+    showAlert();
+}
 
-        divAlertaRegistroPonto.classList.remove("hidden");
-        divAlertaRegistroPonto.classList.add("show");
+// Funções auxiliares
+function showAlert() {
+    divAlertaRegistroPonto.classList.remove("hidden");
+    divAlertaRegistroPonto.classList.add("show");
 
-        setTimeout(() => {
-            divAlertaRegistroPonto.classList.remove("show");
-            divAlertaRegistroPonto.classList.add("hidden");
-        }, 5000);
-    }
-});
+    setTimeout(closeAlert, 5000);
+}
 
-function generateReport() {
-    let registros = getRegisterLocalStorage();
+function closeAlert() {
+    divAlertaRegistroPonto.classList.remove("show");
+    divAlertaRegistroPonto.classList.add("hidden");
+}
 
-    registros.forEach((registro) => {
-        if (registro.isPastRegister) {
-            console.log("Registro no passado: ", registro);
-            // Aqui você pode estilizar o registro no relatório com uma classe especial
-        } else {
-            console.log("Registro normal: ", registro);
-        }
+function updateLastRegisterInfo(ponto) {
+    localStorage.setItem("lastDateRegister", ponto.data);
+    localStorage.setItem("lastTimeRegister", ponto.hora);
+    localStorage.setItem("lastTypeRegister", ponto.tipo);
+}
+
+async function getCurrentPosition() {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            resolve({
+                "latitude": position.coords.latitude,
+                "longitude": position.coords.longitude
+            });
+        },
+        (error) => {
+            reject("Erro ao recuperar a localização: " + error);
+        });
     });
 }
 
-
 function saveRegisterLocalStorage(register) {
-    const typeRegister = document.getElementById("tipos-ponto");
-    registerLocalStorage.push(register); // Array
+    registerLocalStorage.push(register);
     localStorage.setItem("register", JSON.stringify(registerLocalStorage));
-    localStorage.setItem("lastTypeRegister", typeRegister.value);
-} 
+}
 
 function getRegisterLocalStorage() {
     let registers = localStorage.getItem("register");
-
-    if(!registers) {
-        return [];
-    }
-
-    return JSON.parse(registers); 
-}
-
-// TO-DO:
-// alterar o nome da função
-function register() {
-    dialogData.textContent = "Data: " + getCurrentDate();
-    dialogHora.textContent = "Hora: " + getCurrentHour();
-    
-    let lastTypeRegister = localStorage.getItem("lastTypeRegister");
-    if(lastTypeRegister) {
-        const typeRegister   = document.getElementById("tipos-ponto");
-        typeRegister.value   = nextRegister[lastTypeRegister];
-        let lastRegisterText = "Último registro: " + localStorage.getItem("lastDateRegister") + " - " + localStorage.getItem("lastTimeRegister") + " | " + localStorage.getItem("lastTypeRegister")
-        document.getElementById("dialog-last-register").textContent = lastRegisterText;
-    }
-
-    // TO-DO
-    // Como "matar" o intervalo a cada vez que o dialog é fechado?
-    setInterval(() => {
-        dialogHora.textContent = "Hora: " + getCurrentHour();
-    }, 1000);
-
-    dialogPonto.showModal();
-}
-
-function registerPass() {
-    dialogDataPass.textContent = "Data Atual: " + getCurrentDate();
-    dialogHoraPass.textContent = "Hora: " + getCurrentHour();
-    dialogDataPassada.textContent = "Data Passada: " + getCurrentDate();
-
-    
-    let lastTypeRegister = localStorage.getItem("lastTypeRegister");
-    if(lastTypeRegister) {
-        const typeRegister   = document.getElementById("tipos-ponto");
-        typeRegister.value   = nextRegister[lastTypeRegister];
-        let lastRegisterText = "Último registro: " + localStorage.getItem("lastDateRegister") + " - " + localStorage.getItem("lastTimeRegister") + " | " + localStorage.getItem("lastTypeRegister")
-        document.getElementById("dialog-last-register").textContent = lastRegisterText;
-    }
-
-    // TO-DO
-    // Como "matar" o intervalo a cada vez que o dialog é fechado?
-    setInterval(() => {
-        dialogHora.textContent = "Hora: " + getCurrentHour();
-    }, 1000);
-
-    dialogPonto.showModal();
+    return registers ? JSON.parse(registers) : [];
 }
 
 function getWeekDay() {
     const date = new Date();
-    let days = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+    const days = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
     return days[date.getDay()];
 }
 
 function getCurrentHour() {
     const date = new Date();
-    return String(date.getHours()).padStart(2, '0') + ":" + String(date.getMinutes()).padStart(2, '0') + ":" + String(date.getSeconds()).padStart(2, '0');
+    return date.toTimeString().split(' ')[0]; // HH:MM:SS
 }
 
 function getCurrentDate() {
     const date = new Date();
-    return String(date.getDate()).padStart(2, '0') + "/" + String((date.getMonth() + 1)).padStart(2, '0') + "/" + String(date.getFullYear()).padStart(2, '0');
+    return date.toLocaleDateString('pt-BR'); // DD/MM/YYYY
 }
 
 function printCurrentHour() {
     horaMinSeg.textContent = getCurrentHour();
 }
-
-printCurrentHour();
-setInterval(printCurrentHour, 1000);
