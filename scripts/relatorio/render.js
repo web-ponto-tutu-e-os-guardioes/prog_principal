@@ -38,7 +38,9 @@ export function renderList() {
         const pontoPassadoMsg = registrosPorData[date].some(register => register.isPastRegister) 
             ? '<span style="color: red;"><strong>(ponto no passado)</strong></span>' : '';
     
-        dataElement.innerHTML = `<a href="#" class="toggle-details"> ✅ ${date} ${pontoPassadoMsg}</a>`;
+        dataElement.innerHTML = `
+            <a href="#" class="toggle-details"> ✅ ${date} ${pontoPassadoMsg}</a>
+        `;
         divRegistro.appendChild(dataElement);
     
         const detailsDiv = document.createElement('div');
@@ -67,7 +69,7 @@ export function renderList() {
     
                     <p><strong>Observações:</strong> ${register.obs || 'Sem observações'}</p>
                 </div>
-                <div>
+                <div id="botoes-exc-edit">
                     <button class="editar">✏️</button>
                     <button class="excluir">❌</button>
                 </div>

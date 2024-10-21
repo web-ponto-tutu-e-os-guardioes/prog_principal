@@ -1,3 +1,7 @@
+:root {
+    --fonte-poppins: "Poppins", sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +9,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--fonte-poppins);
     background-color: #f4f4f4;
 }
 
@@ -15,7 +19,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -23,13 +28,19 @@ header {
     align-items: center;
 }
 
+
 .logo img {
-    height: 50px;
-    margin-right: 15px;
+    height: 60px;
+    margin-right: 20px;
+    transition: transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.2);
 }
 
 .header-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
@@ -40,12 +51,22 @@ header {
 
 .history-button {
     border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #007EA7;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     margin-right: 20px;
+}
+
+.history-button:hover {
+    background-color: #005F73;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .user-circle {
@@ -57,6 +78,11 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.user-circle:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .user-circle img {
