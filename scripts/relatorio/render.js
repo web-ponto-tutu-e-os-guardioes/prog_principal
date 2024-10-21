@@ -35,11 +35,8 @@ export function renderList() {
 
         const dataElement = document.createElement('p');
     
-        const pontoPassadoMsg = registrosPorData[date].some(register => register.isPastRegister) 
-            ? '<span style="color: red;"><strong>(ponto no passado)</strong></span>' : '';
-    
         dataElement.innerHTML = `
-            <a href="#" class="toggle-details"> ✅ ${date} ${pontoPassadoMsg}</a>
+            <a href="#" class="toggle-details"> ✅ ${date}</a>
         `;
         divRegistro.appendChild(dataElement);
     
@@ -56,7 +53,7 @@ export function renderList() {
                 <div id="conteudo-${index}">
                     <p><strong>Tipo:</strong> ${register.tipo}</p>
                     <p><strong>Horário:</strong> ${register.hora || 'Horário não registrado'}</p>
-    
+
                     <details class="details-localização">
                     <summary><strong> Localização </strong></summary>
                     <div class="details-content">
@@ -66,8 +63,10 @@ export function renderList() {
                         <a href="${link}" target="_blank">Abrir localização no Google Maps</a>
                         <div id="map-${index}" class="map" style="height: 200px;"></div>  
                     </details>
-    
+
                     <p><strong>Observações:</strong> ${register.obs || 'Sem observações'}</p>
+                    ${register.isEdited ? '<p style="color:orange;"><strong>Registro editado</strong></p>' : ''}
+                    ${register.isPastRegister ? '<p style="color:red;"><strong>Ponto no passado</strong></p>' : ''}
                 </div>
                 <div id="botoes-exc-edit">
                     <button class="editar">✏️</button>
@@ -75,6 +74,8 @@ export function renderList() {
                 </div>
                 <p class="alert-message" style="display:none; color:red; margin-top: 10px;"></p>
             `;
+
+
     
             detailsDiv.appendChild(detalheRegistro);
     

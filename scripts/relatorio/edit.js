@@ -30,7 +30,7 @@ export function setupEdit(detalheRegistro, register, index, renderList) {
         const form = detalheRegistro.querySelector('.form-edicao');
         form.addEventListener('submit', (event) => {
             event.preventDefault();
-
+        
             const now = new Date();
             const selectedTime = form.hora.value;
 
@@ -47,15 +47,16 @@ export function setupEdit(detalheRegistro, register, index, renderList) {
                     latitude: form.latitude.value,
                     longitude: form.longitude.value
                 },
-                obs: form.obs.value
+                obs: form.obs.value,
+                isEdited: true
             };
 
             const registers = getRegisters();
             registers[index] = updatedRegister;
             updateRegisters(registers);
-
+        
             renderList();
-        });
+        });        
 
         const cancelarButton = detalheRegistro.querySelector('.cancelar-edicao');
         cancelarButton.addEventListener('click', () => {
