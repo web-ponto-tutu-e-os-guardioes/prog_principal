@@ -32,7 +32,7 @@ btnBaterPontoPass.addEventListener("click", () => {
     dialogPontoPass.showModal(); // Para abrir o diálogo como modal
 });
 btnDialogBaterPonto.addEventListener("click", handleRegister);
-btnDialogBaterPontoPass.addEventListener("click", handleRegister)
+btnDialogBaterPontoPass.addEventListener("click", handlePastRegister)
 btnDialogFechar.addEventListener("click", () => dialogPonto.close());
 btnDialogFecharPass.addEventListener("click", () => dialogPontoPass.close());
 btnCloseAlertRegister.addEventListener("click", closeAlert);
@@ -70,10 +70,22 @@ async function handleRegister() {
     inputObservacao.value = "";
 }
 
-function handlePastRegister() {
+function formatarData(data) {
+    if (data.includes('-')) {
+        const [ano, mes, dia] = data.split('-');            // formatar a data para '/' em vez de -
+        return `${dia}/${mes}/${ano}`;
+    }
+    return data;
+}
+
+async function handlePastRegister() {
     const inputData = document.getElementById("data").value;
+    const typeRegister = document.getElementById("tipos-ponto");
+    const inputObservacao = document.getElementById("input-observacao");
     const currentDate = new Date();
     const chosenDate = new Date(inputData);
+    
+    let userCurrentPosition = await getCurrentPosition();
 
     if (chosenDate > currentDate) {
         alert("Não é possível registrar ponto em uma data futura!");
@@ -81,10 +93,10 @@ function handlePastRegister() {
     }
 
     let pontoPassado = {
-        "data": inputData,
+        "data": formatarData(inputData),
         "hora": getCurrentHour(),
         "localizacao": userCurrentPosition,
-        "id": 1,
+        "id": registerLocalStorage.length + 1,
         "tipo": typeRegister.value,
         "isPastRegister": true,
         "obs": inputObservacao.value
