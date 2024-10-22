@@ -1,8 +1,6 @@
-// Função para calcular a diferença de horas entre entrada e saída
 function calcularHorasTrabalhadasPorDia() {
     let registros = getRegisterLocalStorage();
     
-    // Agrupar registros por data
     let horasPorDia = {};
 
     registros.forEach(registro => {
@@ -10,12 +8,10 @@ function calcularHorasTrabalhadasPorDia() {
         const hora = registro.hora;
         const tipo = registro.tipo;
         
-        // Inicializar o array de registros por data
         if (!horasPorDia[data]) {
             horasPorDia[data] = { entrada: null, saida: null };
         }
 
-        // Identificar a entrada e a saída
         if (tipo === 'entrada') {
             horasPorDia[data].entrada = hora;
         } else if (tipo === 'saida') {
@@ -23,7 +19,6 @@ function calcularHorasTrabalhadasPorDia() {
         }
     });
 
-    // Calcular a diferença de horas
     let resultados = [];
 
     for (const data in horasPorDia) {
@@ -31,6 +26,8 @@ function calcularHorasTrabalhadasPorDia() {
         if (entrada && saida) {
             const horasTrabalhadas = calcularDiferencaHoras(entrada, saida);
             resultados.push({ data, horasTrabalhadas });
+        } else {
+            resultados.push({ data, horasTrabalhadas: 0 });
         }
     }
 
@@ -44,18 +41,18 @@ function calcularDiferencaHoras(entrada, saida) {
     const dataEntrada = new Date(0, 0, 0, hEntrada, mEntrada);
     const dataSaida = new Date(0, 0, 0, hSaida, mSaida);
 
-    // Diferença em milissegundos, convertendo para horas
-    const diferenca = (dataSaida - dataEntrada) / (1000 * 60 * 60);
-    return Math.abs(diferenca);
+    const diferencaMilissegundos = dataSaida - dataEntrada;
+    const diferencaHoras = diferencaMilissegundos / (1000 * 60 * 60);
+    return Math.abs(diferencaHoras); 
 }
 
-// Recuperar registros do localStorage
+// Função para obter os registros do localStorage
 function getRegisterLocalStorage() {
     let registers = localStorage.getItem("register");
     return registers ? JSON.parse(registers) : [];
 }
 
-// Dados para o gráfico
+// Obter os dados para o gráfico
 let resultados = calcularHorasTrabalhadasPorDia();
 let labels = resultados.map(item => item.data);  // Datas
 let data = resultados.map(item => item.horasTrabalhadas);  // Horas trabalhadas
