@@ -27,8 +27,8 @@ body {
 
 #btn-dialog-fechar {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 10px;
+    right: 10px;
 }
 
 #alerta-registro-ponto {
@@ -131,4 +131,17 @@ body {
     font-size: 16px;
     padding: 12px;
     cursor: pointer;
+}
+
+#dialog-ponto, #dialog-ponto-pass {
+    padding: 150px;
+    border-radius: 10px;
+    margin: auto;
+    border: 1px solid black;
+}
+
+#btn-dialog-fechar-pass {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
