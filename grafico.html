@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório</title>
-    <link rel="stylesheet" href="/style/relatorio.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <title>Gráfico</title>
+    <link rel="stylesheet" href="/style/grafico.css">
 </head>
 <body>
-
+    
     <header>
         <div class="logo">
           <a href="./index.html">
@@ -29,15 +27,12 @@
             </div>
         </div>
     </header>
-
-    <main>
-        <div id="start-relatorio">
-            <h1>Relatório de Registro de Pontos</h1>
-            <p id="enunciado">( Clique em uma das seguintes datas )</p>
-        </div>
-        <div id="registros-relatorio"></div>    
-        <button onclick="window.location.href='./grafico.html'" id="btn-gerar-grafico">Gerar Grafico</button>
-    </main>
-    <script type="module" src="../scripts/relatorio/relatorio.js"></script>
+    <div>
+        <h1>Gráfico de Horas Trabalhadas</h1>
+        <canvas id="workHoursChart"></canvas>
+        
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script SRC="./scripts/grafico/render.js"></script>
+    </div>
 </body>
 </html>
