@@ -23,8 +23,12 @@ export function renderList() {
     }, {});
     
     const datasOrdenadas = Object.keys(registrosPorData).sort((a, b) => {
-        const dataA = new Date(a);
-        const dataB = new Date(b);
+        const [diaA, mesA, anoA] = a.split('/').map(Number);
+        const [diaB, mesB, anoB] = b.split('/').map(Number);
+    
+        const dataA = new Date(anoA, mesA - 1, diaA);
+        const dataB = new Date(anoB, mesB - 1, diaB);
+    
         return dataB - dataA;
     });
     
