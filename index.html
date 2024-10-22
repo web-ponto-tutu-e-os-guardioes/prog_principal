@@ -19,6 +19,11 @@
       </div>
       <div class="header-right">
           <button onclick="window.location.href='./relatorio.html'" class="history-button">Relatório</button>
+          <link rel="stylesheet" href="acessiblidades/modo-escuro.css">
+          <button class="history-button" id="ClaroEscuro">
+            <img src="style/assets/modo-claroescuro.png" width="25" height="25">
+          </button>
+          <script src="acessiblidades/modo-escuro.js"></script>
           <div class="user-circle">
               <img src="./style/assets/tutu_e_sanderson.jpg" alt="Foto do usuário">
           </div>
@@ -65,7 +70,7 @@
 
       <button onclick="window.location.href='./relatorio.html'" id="relatorioButton">Mostrar relatório</button>
       <button id="btn-bater-ponto-pass">Bater ponto no passado</button>
-  
+      
     </div>
 
     <!-- Diálogo para registrar ponto no passado -->
@@ -89,29 +94,29 @@
     <script src="scripts/index.js"></script>
 
     <div>
-        <h1>Calendar</h1>
+      <h1 id="CalendarioChat">Calendario</h1>
       <div class="calendar">
-        <header>
-          <h3></h3>
-          <nav>
-            <button id="prev"></button>
-            <button id="next"></button>
-          </nav>
-        </header>
-        <section>
-          <ul class="days">
-            <li>Sun</li>
-            <li>Mon</li>
-            <li>Tue</li>
-            <li>Wed</li>
-            <li>Thu</li>
-            <li>Fri</li>
-            <li>Sat</li>
-          </ul>
-          <ul class="dates"></ul>
-        </section>
+          <header>
+              <h3></h3>
+              <nav>
+                  <button id="prev"></button>
+                  <button id="next"></button>
+              </nav>
+          </header>
+          <section>
+              <ul class="days">
+                  <li>Sun</li>
+                  <li>Mon</li>
+                  <li>Tue</li>
+                  <li>Wed</li>
+                  <li>Thu</li>
+                  <li>Fri</li>
+                  <li>Sat</li>
+              </ul>
+              <ul class="dates"></ul>
+          </section>
       </div>
-    </div>
+  </div>
 
 </body>
 </html>

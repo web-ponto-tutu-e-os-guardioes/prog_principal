@@ -1,0 +1,32 @@
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background-color: #2b2929;
+    color: white;
+}
+
+h1 {
+    background-color:  white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode h1 {
+    background-color: #2b2929;
+    color: white;
+}
+
+.calendar {
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode .calendar {
+    background-color: #333;
+    color: #fff;
+}

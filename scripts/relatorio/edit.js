@@ -1,7 +1,5 @@
 import { getRegisters, updateRegisters } from './getStorage.js';
 
-// TO-DO: horario deve conter os segundos também na hora da edicao, testar...
-
 export function setupEdit(detalheRegistro, register, index, renderList) {
     const editarButton = detalheRegistro.querySelector('.editar');
     editarButton.addEventListener('click', () => {
@@ -15,7 +13,7 @@ export function setupEdit(detalheRegistro, register, index, renderList) {
                     <option value="saida" ${register.tipo === 'saida' ? 'selected' : ''}>Saída</option>
                 </select>
                 <label>Horário:</label>
-                <input type="time" name="hora" value="${register.hora ? register.hora.substring(0, 5) : ''}">
+                <input type="time" step="1" name="hora" value="${register.hora ? new Date(`1970-01-01T${register.hora}Z`).toISOString().substring(11, 19) : ''}">
                 <label>Localização - latitude:</label>
                 <input type="text" name="latitude" value="${register.localizacao.latitude || ''}">
                 <label>Localização - longitude:</label>
@@ -30,11 +28,10 @@ export function setupEdit(detalheRegistro, register, index, renderList) {
         const form = detalheRegistro.querySelector('.form-edicao');
         form.addEventListener('submit', (event) => {
             event.preventDefault();
-        
+
             const now = new Date();
             const selectedTime = form.hora.value;
-
-            if (new Date(`${now.toDateString()} ${selectedTime}`) > now) {
+            if (new Date(`1970-01-01T${selectedTime}Z`) > now) {
                 alert("O horário não pode ser no futuro. Insira um horário válido.");
                 return;
             }
@@ -42,7 +39,7 @@ export function setupEdit(detalheRegistro, register, index, renderList) {
             const updatedRegister = {
                 ...register,
                 tipo: form['tipos-ponto'].value,
-                hora: form.hora.value,
+                hora: selectedTime,
                 localizacao: {
                     latitude: form.latitude.value,
                     longitude: form.longitude.value
@@ -54,9 +51,9 @@ export function setupEdit(detalheRegistro, register, index, renderList) {
             const registers = getRegisters();
             registers[index] = updatedRegister;
             updateRegisters(registers);
-        
+
             renderList();
-        });        
+        });
 
         const cancelarButton = detalheRegistro.querySelector('.cancelar-edicao');
         cancelarButton.addEventListener('click', () => {
