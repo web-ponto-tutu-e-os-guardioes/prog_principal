@@ -19,6 +19,8 @@ const dialogHoraPass = document.getElementById("dialog-hora-pass");
 const dialogDataPassada = document.getElementById("dialog-data-pass");
 const btnBaterPonto = document.getElementById("btn-bater-ponto");
 
+const dialogLastRegister = document.getElementById("dialog-last-register");
+
 let registerLocalStorage = getRegisterLocalStorage();
 
 // Exibir informações iniciais
@@ -169,3 +171,15 @@ function getCurrentDate() {
 function printCurrentHour() {
     horaMinSeg.textContent = getCurrentHour();
 }
+
+function getLastPoint() {
+    let lastType = localStorage.getItem("lastTypeRegister");
+    let lastDate = localStorage.getItem("lastDateRegister");
+    let lastTime = localStorage.getItem("lastTimeRegister");
+
+    return "Ultimo ponto registrado: \n" + lastType + "\nàs " + lastTime + "\nde " + lastDate;
+}
+
+setInterval(() => {
+    dialogLastRegister.textContent = getLastPoint();        // mudar a cada segundo no dialog o ultimo ponto registrado 
+}, 1000);
