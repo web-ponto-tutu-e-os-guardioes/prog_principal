@@ -80,7 +80,7 @@ function formatarData(data) {
 
 async function handlePastRegister() {
     const inputData = document.getElementById("data").value;
-    const typeRegister = document.getElementById("tipos-ponto");
+    const typeRegister = document.getElementById("tipos-ponto-pass");
     const inputObservacao = document.getElementById("input-observacao");
     const currentDate = new Date();
     const chosenDate = new Date(inputData);
