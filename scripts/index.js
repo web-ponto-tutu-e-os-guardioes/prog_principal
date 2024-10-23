@@ -16,7 +16,7 @@ const dialogPontoPass = document.getElementById("dialog-ponto-pass");
 const dialogData = document.getElementById("dialog-data");
 const dialogHora = document.getElementById("dialog-hora");
 const dialogHoraPass = document.getElementById("dialog-hora-pass");
-const dialogDataPassada = document.getElementById("dialog-data-pass");
+const dialogDataPass = document.getElementById("dialog-data-pass");
 const btnBaterPonto = document.getElementById("btn-bater-ponto");
 
 const dialogLastRegister = document.getElementById("dialog-last-register");
@@ -26,6 +26,9 @@ let registerLocalStorage = getRegisterLocalStorage();
 // Exibir informações iniciais
 diaSemana.textContent = getWeekDay();
 diaMesAno.textContent = getCurrentDate();
+dialogHoraPass.textContent = "Hora Atual:  " + getCurrentHour();
+dialogDataPass.textContent = "Data Atual:  " + getCurrentDate();
+
 printCurrentHour();
 setInterval(printCurrentHour, 1000);
 
