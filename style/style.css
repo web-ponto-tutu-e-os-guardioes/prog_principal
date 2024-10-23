@@ -29,6 +29,16 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#btn-dialog-fechar:hover {
+    color: black;
+    background-color: rgb(235, 149, 149);
 }
 
 #alerta-registro-ponto {
@@ -104,11 +114,21 @@ body {
 #dialog-ponto select {
     padding: 20px;
     font-size: 1.3rem;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+#input-observacao {
+    border-radius: 10px;
+    border: 1px solid black;
 }
 
 #btn-dialog-bater-ponto {
     padding: 20px;
     font-size: 1.3rem;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid black;
 }
 
 .div-input-observacao {

@@ -21,7 +21,7 @@ export function renderList() {
         acc[date].push(register);
         return acc;        
     }, {});
-    
+
     const datasOrdenadas = Object.keys(registrosPorData).sort((a, b) => {
         const [diaA, mesA, anoA] = a.split('/').map(Number);
         const [diaB, mesB, anoB] = b.split('/').map(Number);
@@ -32,27 +32,30 @@ export function renderList() {
         return dataB - dataA;
     });
     
-
-    datasOrdenadas.forEach(date => { 
+    datasOrdenadas.forEach(date => {
         const divRegistro = document.createElement('div');
         divRegistro.classList.add('registro-item');
 
         const dataElement = document.createElement('p');
-    
         dataElement.innerHTML = `
             <a href="#" class="toggle-details"> ✅ ${date}</a>
         `;
         divRegistro.appendChild(dataElement);
-    
+
         const detailsDiv = document.createElement('div');
         detailsDiv.classList.add('registros-ponto');
         detailsDiv.style.display = 'none';
-    
+
+        registrosPorData[date].sort((a, b) => {
+            if (!a.hora || !b.hora) return 0;
+            return b.hora.localeCompare(a.hora);
+        });
+
         registrosPorData[date].forEach((register, index) => {
             const link = `https://www.google.com/maps?q=${register.localizacao.latitude},${register.localizacao.longitude}`;
             const detalheRegistro = document.createElement('div');
             detalheRegistro.classList.add('registro-detalhe');
-    
+
             detalheRegistro.innerHTML = `
                 <div id="conteudo-${index}">
                     <p><strong>Tipo:</strong> ${register.tipo}</p>
@@ -79,34 +82,32 @@ export function renderList() {
                 <p class="alert-message" style="display:none; color:red; margin-top: 10px;"></p>
             `;
 
-
-    
             detailsDiv.appendChild(detalheRegistro);
-    
+
             setupEdit(detalheRegistro, register, index, renderList);
             setupDelete(detalheRegistro);
-    
+
             const detailsElement = detalheRegistro.querySelector('details');
             detailsElement.addEventListener('toggle', function() {
                 if (detailsElement.open) {
                     const mapDiv = detalheRegistro.querySelector(`#map-${index}`);
                     const map = L.map(mapDiv).setView([register.localizacao.latitude, register.localizacao.longitude], 13);
-    
+
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(map);
-    
+
                     L.marker([register.localizacao.latitude, register.localizacao.longitude]).addTo(map);
                 }
             });
         });
-    
+
         divRegistro.appendChild(detailsDiv);
         registrosContainer.appendChild(divRegistro);
-    
+
         dataElement.querySelector('.toggle-details').addEventListener('click', function(event) {
             event.preventDefault();
             toggleDetails(detailsDiv);
         });
-    });    
+    });
 }
