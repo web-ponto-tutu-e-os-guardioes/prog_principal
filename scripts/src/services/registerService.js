@@ -33,11 +33,16 @@ export async function handlePastRegister() {
     const inputObservacao = document.getElementById("input-observacao");
     const userCurrentPosition = await getCurrentPosition();
 
+    if (!inputData) {
+        alert("Não é possível registrar ponto no passado sem uma data!");
+        return;
+    }
+
     if (new Date(inputData) > new Date()) {
         alert("Não é possível registrar ponto em uma data futura!");
         return;
     }
-
+    
     const pontoPassado = {
         data: formatarData(inputData),
         hora: getCurrentHour(),
