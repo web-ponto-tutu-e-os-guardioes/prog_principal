@@ -75,7 +75,7 @@ async function handleRegister() {
         let lastRegisterText = "Último registro: " + localStorage.getItem("lastDateRegister") + " - " + localStorage.getItem("lastTimeRegister") + " | " + localStorage.getItem("lastTypeRegister")
         document.getElementById("dialog-last-register").textContent = lastRegisterText;
     }
-    
+
     saveRegisterLocalStorage(ponto);
     updateLastRegisterInfo(ponto);
     showAlert();
@@ -187,6 +187,10 @@ function getLastPoint() {
     let lastType = localStorage.getItem("lastTypeRegister");
     let lastDate = localStorage.getItem("lastDateRegister");
     let lastTime = localStorage.getItem("lastTimeRegister");
+
+    if (lastDate, lastTime, lastType == null) {
+        return "Nenhum ponto registrado";
+    }
 
     return "Ultimo ponto registrado: \n" + lastType + "\nàs " + lastTime + "\nde " + lastDate;
 }
