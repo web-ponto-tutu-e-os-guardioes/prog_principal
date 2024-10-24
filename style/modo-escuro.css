@@ -75,3 +75,8 @@ body.dark-mode .linkGoogle {
 body.dark-mode .linkGoogle:hover {
     color: #3F72AF;
 }
+
+body.dark-mode .today {
+    color: white;
+    border: 2px solid white;
+}

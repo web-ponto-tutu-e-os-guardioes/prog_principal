@@ -99,8 +99,10 @@ style.innerHTML = `
     background-color: green;
   }
   .today {
-    background-color: black;
-    color: white;
+    border: 2px solid black; 
+    color: black;
+    background-color: transparent;
+    border-radius: 50%;
   }
 `;
 document.head.appendChild(style);
