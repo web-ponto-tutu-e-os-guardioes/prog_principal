@@ -1,5 +1,7 @@
+import { getRegisters } from '../relatorio/getStorage.js'
+
 function calcularHorasTrabalhadasPorDia() {
-    let registros = getRegisterLocalStorage();
+    let registros = getRegisters();
     
     let horasPorDia = {};
 
@@ -27,7 +29,7 @@ function calcularHorasTrabalhadasPorDia() {
             const horasTrabalhadas = calcularDiferencaHoras(entrada, saida);
             resultados.push({ data, horasTrabalhadas });
         } else {
-            resultados.push({ data, horasTrabalhadas: 0 });
+            resultados.push({ data, horasTrabalhadas: '0 horas 0 minutos' });
         }
     }
 
@@ -42,20 +44,18 @@ function calcularDiferencaHoras(entrada, saida) {
     const dataSaida = new Date(0, 0, 0, hSaida, mSaida);
 
     const diferencaMilissegundos = dataSaida - dataEntrada;
-    const diferencaHoras = diferencaMilissegundos / (1000 * 60 * 60);
-    return Math.abs(diferencaHoras); 
-}
+    const diferencaMinutos = diferencaMilissegundos / (1000 * 60);
 
-// Função para obter os registros do localStorage
-function getRegisterLocalStorage() {
-    let registers = localStorage.getItem("register");
-    return registers ? JSON.parse(registers) : [];
+    const horas = Math.floor(diferencaMinutos / 60);
+    const minutos = Math.floor(diferencaMinutos % 60);
+
+    return `${horas} horas ${minutos} minutos`;
 }
 
 // Obter os dados para o gráfico
 let resultados = calcularHorasTrabalhadasPorDia();
 let labels = resultados.map(item => item.data);  // Datas
-let data = resultados.map(item => item.horasTrabalhadas);  // Horas trabalhadas
+let data = resultados.map(item => item.horasTrabalhadas);
 
 // Configuração e renderização do gráfico
 const ctx = document.getElementById('workHoursChart').getContext('2d');
@@ -65,7 +65,10 @@ const workHoursChart = new Chart(ctx, {
         labels: labels,  // Datas no eixo X
         datasets: [{
             label: 'Horas Trabalhadas',
-            data: data,  // Horas no eixo Y
+            data: data.map(item => {
+                const [horas, minutos] = item.match(/\d+/g).map(Number);
+                return horas + minutos / 60;
+            }),
             backgroundColor: 'rgba(75, 192, 192, 0.6)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
@@ -84,6 +87,16 @@ const workHoursChart = new Chart(ctx, {
                 title: {
                     display: true,
                     text: 'Data'
+                }
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        const label = resultados[tooltipItem.dataIndex].horasTrabalhadas;
+                        return `${label}`;
+                    }
                 }
             }
         }
