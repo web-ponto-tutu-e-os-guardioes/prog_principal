@@ -11,23 +11,27 @@
 <body>
 
     <header>
-      <div class="logo">
-        <a href="index.html">
-          <img src="./style/assets/logoPontModerno.png" alt="Logo do Ponto Eletrônico">
-        </a>
-          <span class="header-title">Ponto Eletrônico</span>
-      </div>
-      <div class="header-right">
-          <button onclick="window.location.href='./relatorio.html'" class="history-button">Relatório</button>
-          <link rel="stylesheet" href="./style/modo-escuro.css">
-          <button class="history-button" id="ClaroEscuro">
-            <img src="style/assets/modo-claroescuro.png" width="25" height="25">
-          </button>
-          <script src="./scripts/acessibilidade/modo-escuro.js"></script>
-          <div class="user-circle">
-              <img src="./style/assets/tutu_e_sanderson.jpg" alt="Foto do usuário">
-          </div>
+        <div class="header-left">
+            <img src="./style/assets/logoPontModerno.png" alt="Logo do Ponto Eletrônico">
+            <span class="header-title">Ponto Eletrônico</span>
         </div>
+
+        <nav class="header-nav">
+            <a href="./index.html" class="nav-link">
+                <img id="imagemHome" src="./style/assets/homeIcon.png" alt="Ícone Home">
+            </a>
+            <a href="./relatorio.html" class="nav-link">
+                <button class="history-button">Relatório</button>
+            </a>
+            <button class="theme-toggle-button" id="ClaroEscuro">
+                <img id="imagemModoCE" src="./style/assets/modo-claroescuro.png" width="30" height="30" alt="Alternar modo claro/escuro">
+            </button>
+            <div class="user-profile">
+                <img src="./style/assets/tutu_e_sanderson.jpg" alt="Foto do usuário" class="user-image">
+            </div>
+        </nav>
+        <link rel="stylesheet" href="./style/modo-escuro.css">
+        <script src="./scripts/acessibilidade/modo-escuro.js" defer></script>
     </header>
 
     <!-- Alerta de ponto registrado -->
@@ -91,7 +95,7 @@
     </dialog>
 
     <div>
-      <h1 id="CalendarioChat">Calendario</h1>
+      <h1 id="CalendarioChat">Calendário</h1>
       <div class="calendar">
           <header>
               <h3></h3>
