@@ -14,14 +14,16 @@ export function setupEdit(detalheRegistro, register, index, renderList) {
                 </select>
                 <label>Horário:</label>
                 <input type="time" step="1" name="hora" value="${register.hora ? new Date(`1970-01-01T${register.hora}Z`).toISOString().substring(11, 19) : ''}">
-                <label>Localização - latitude:</label>
+                <label>Latitude:</label>
                 <input type="text" name="latitude" value="${register.localizacao.latitude || ''}">
-                <label>Localização - longitude:</label>
+                <label>Longitude:</label>
                 <input type="text" name="longitude" value="${register.localizacao.longitude || ''}">
                 <label>Observações:</label>
                 <input type="text" name="obs" value="${register.obs || ''}">
-                <button type="submit">Salvar</button>
-                <button type="button" class="cancelar-edicao">Cancelar</button>
+                <div id="botoes-edit">
+                    <button type="submit">Salvar</button>
+                    <button type="button" class="cancelar-edicao">Cancelar</button>
+                </div>
             </form>
         `;
 

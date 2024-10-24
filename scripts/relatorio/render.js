@@ -62,7 +62,7 @@ export function renderList() {
                     <p><strong>Horário:</strong> ${register.hora || 'Horário não registrado'}</p>
 
                     <details class="details-localização">
-                    <summary><strong> Localização </strong></summary>
+                    <summary id="div-local"><strong> Localização </strong></summary>
                     <div class="details-content">
                         <p class="registro-details-latitude"><strong>Latitude:</strong> ${register.localizacao.latitude || 'Não possui latitude'}</p>
                         <p class="registro-details-longitude"><strong>Longitude:</strong> ${register.localizacao.longitude || 'Não possui longitude'}</p>
@@ -75,11 +75,13 @@ export function renderList() {
                     ${register.isEdited ? '<p style="color:orange;"><strong>Registro editado</strong></p>' : ''}
                     ${register.isPastRegister ? '<p style="color:red;"><strong>Ponto no passado</strong></p>' : ''}
                 </div>
-                <div id="botoes-exc-edit">
-                    <button class="editar">✏️</button>
-                    <button class="excluir">❌</button>
+                <div id="botoes-e-msg">
+                    <div id="botoes-exc-edit">
+                        <button class="editar">✏️</button>
+                        <button class="excluir">❌</button>
+                    </div>
+                    <p class="alert-message" style="display:none; color:red; margin-top: 10px;"></p>
                 </div>
-                <p class="alert-message" style="display:none; color:red; margin-top: 10px;"></p>
             `;
 
             detailsDiv.appendChild(detalheRegistro);

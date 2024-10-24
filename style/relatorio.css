@@ -25,6 +25,7 @@ main {
     display: flex;
     flex-direction: column;
     font-family: var(--fonte-poppins);
+    gap: 20px;
 }
 
 #start-relatorio {
@@ -35,20 +36,51 @@ main {
     font-weight: 700;
 }
 
+.form-edicao {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-size: 15px;
+}
+
+input, select {
+    border-radius: 3px;
+    border: 0.5px solid black;
+    font-size: 15px;
+    padding: 10px;
+}
+
+#botoes-edit {
+    display: flex;
+    flex-direction: row;
+    width: 10%;
+    gap: 10px;
+}
+
 #btn-gerar-grafico {
     padding: 20px;
     background-color: blue;
     color: white;
     font-size: 1.3rem;
     border: 0px;
+    width: 20%;
+    align-self: center;
+    transition: transform 0.3s ease;
+    margin-bottom: 90px;
+}
+
+#btn-gerar-grafico:hover {
+    transform: scale(1.1);
 }
 
 /* Estilos dos parágrafos */
 p {
     font-size: 1.25rem;
-    margin: 20px 10px;
     color: black;
-    line-height: 1.5;
+    line-height: 2.5;
 }
 
 /* Links */
@@ -77,9 +109,15 @@ a:hover {
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 10px;
-    background-color: white;
-    width: calc(100% - 40px);
+    background-color: #DBE2EF;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 90px;
+    margin-right: 90px;
+}
+
+#div-local {
+    cursor: pointer;
+    color: blue;
 }
 
 /* Container de detalhes do registro */
@@ -106,7 +144,7 @@ a:hover {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     padding: 15px;
     border: 2px solid var(--cor-secundaria);
     border-radius: 8px;
@@ -176,11 +214,6 @@ details[open] summary {
     margin-bottom: 20px;
     border: 2px solid darkslategray;
     border-radius: 5px;
-}
-
-footer {
-    bottom: 0;
-    position: absolute;
 }
 
 /* Responsividade para telas menores */
