@@ -40,8 +40,8 @@ export function closeDialogPontoPass() {
 const dialogData = document.getElementById("dialog-data");
 const dialogHora = document.getElementById("dialog-hora");
 
-dialogData.textContent = getCurrentDate();
+dialogData.textContent = "Data: " + getCurrentDate();
 
 setInterval(() => {
-    dialogHora.textContent = getCurrentHour();
+    dialogHora.textContent ="Hora: " +  getCurrentHour();
 });
