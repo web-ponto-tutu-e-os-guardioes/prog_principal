@@ -1,4 +1,5 @@
 @import url('./components/header.css');
+@import url('./components/footer.css');
 
 :root {
     --fonte-poppins: "Poppins", sans-serif;
@@ -16,8 +17,6 @@
 
 /* Estilo geral do body e do layout */
 body {
-    font-family: var(--fonte-poppins);
-    background-color: var(--cor-fundo);
     height: 100vh;
 }
 
@@ -26,7 +25,6 @@ main {
     display: flex;
     flex-direction: column;
     font-family: var(--fonte-poppins);
-    padding: 20px;
 }
 
 #start-relatorio {
@@ -178,6 +176,11 @@ details[open] summary {
     margin-bottom: 20px;
     border: 2px solid darkslategray;
     border-radius: 5px;
+}
+
+footer {
+    bottom: 0;
+    position: absolute;
 }
 
 /* Responsividade para telas menores */
