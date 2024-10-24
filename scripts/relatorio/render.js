@@ -39,7 +39,7 @@ export function renderList() {
     registrosContainer.innerHTML = '';
 
     if (registers.length === 0) {
-        registrosContainer.innerHTML = '<p>Nenhum registro disponível.</p>';
+        registrosContainer.innerHTML = '<p id="msg-registro-ind">Nenhum registro disponível.</p>';
         return;
     }
 

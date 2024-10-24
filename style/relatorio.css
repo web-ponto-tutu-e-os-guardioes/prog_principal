@@ -73,6 +73,10 @@ input, select {
     font-size: 1.2rem;
 }
 
+#msg-registro-ind {
+    text-align: center;
+}
+
 #btn-exportar-pdf:hover {
     transform: scale(1.1);
 }
