@@ -64,6 +64,19 @@ input, select {
     padding: 10px;
 }
 
+#btn-exportar-pdf {
+    align-self: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-bottom: 90px;
+    padding: 20px;
+    font-size: 1.2rem;
+}
+
+#btn-exportar-pdf:hover {
+    transform: scale(1.1);
+}
+
 #botoes-edit {
     display: flex;
     flex-direction: row;
@@ -80,7 +93,6 @@ input, select {
     width: 20%;
     align-self: center;
     transition: transform 0.3s ease;
-    margin-bottom: 90px;
 }
 
 #btn-gerar-grafico:hover {
