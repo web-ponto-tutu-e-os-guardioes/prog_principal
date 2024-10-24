@@ -86,6 +86,14 @@ export function renderList() {
             const detalheRegistro = document.createElement('div');
             detalheRegistro.classList.add('registro-detalhe');
 
+            let arquivoHTML = '';
+            if (register.arquivoNome) {
+                arquivoHTML = `
+                    <p><strong>Anexo:</strong> ${register.arquivoNome}</p>
+                    <a href="${register.arquivoDados}" download="${register.arquivoNome}">Baixar Anexo</a>
+                `;
+            }
+
             detalheRegistro.innerHTML = `
                 <div id="conteudo-${index}">
                     <p><strong>Tipo:</strong> ${register.tipo}</p>
@@ -102,6 +110,7 @@ export function renderList() {
                     </details>
 
                     <p><strong>Observações:</strong> ${register.obs || 'Sem observações'}</p>
+                    ${arquivoHTML}
                     ${register.isEdited ? '<p style="color:orange;"><strong>Registro editado</strong></p>' : ''}
                     ${register.isPastRegister ? '<p style="color:red;"><strong>Ponto no passado</strong></p>' : ''}
                 </div>

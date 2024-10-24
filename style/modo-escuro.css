@@ -35,7 +35,12 @@ body.dark-mode .data-hora {
     background-color: #112D4E;
 }
 
-body.dark-mode #dialog-ponto, #dialog-ponto-pass {
+body.dark-mode #dialog-ponto-pass {
+    background-color: #17406e;
+    color: white;
+}
+
+body.dark-mode #dialog-ponto {
     background-color: #17406e;
     color: white;
 }
