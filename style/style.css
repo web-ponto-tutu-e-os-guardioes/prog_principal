@@ -45,6 +45,18 @@ body {
     background-color: rgb(235, 149, 149);
 }
 
+#dialog-hora-pass {
+    margin-bottom: 10px;
+}
+
+#data, #tipos-ponto-pass {
+    border-radius: 4px;
+    border: 0.5px solid black;
+    padding: 13px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
 #alerta-registro-ponto {
     position: fixed;
     bottom: 20px;
@@ -149,7 +161,19 @@ body {
     transition: transform 0.3s ease;
 }
 
-#btn-dialog-bater-ponto:hover {
+#btn-dialog-bater-ponto-pass {
+    padding: 10px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: rgb(22, 206, 22);
+    color: white;
+    font-weight: normal;
+    transition: transform 0.3s ease;
+}
+
+#btn-dialog-bater-ponto:hover , #btn-dialog-bater-ponto-pass:hover {
     transform: scale(1.05);
 }
 
@@ -182,4 +206,8 @@ body {
     border: none;
     box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.493);
     background-color: #eceaea;
+}
+
+#dialog-ponto-pass {
+    font-size: 1.5rem;
 }

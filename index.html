@@ -82,18 +82,20 @@
     </div>
 
     <!-- Diálogo para registrar ponto no passado -->
+
     <dialog id="dialog-ponto-pass">
-        <p id="dialog-data-pass"></p>
         <p id="dialog-hora-pass"></p>
         <label for="data">Escolha uma data:</label>
         <input type="date" id="data" name="data">
+        <br>
         <select name="tipos-ponto-pass" id="tipos-ponto-pass">
             <option value="entrada">Entrada</option>
             <option value="intervalo">Intervalo</option>
             <option value="volta-intervalo">Volta Intervalo</option>
             <option value="saida">Saída</option>
         </select>
-        <button id="btn-dialog-bater-ponto-pass">Registrar ponto</button>
+        <br>
+        <button id="btn-dialog-bater-ponto-pass">Registrar ponto no passado</button>
         <p id="dialog-last-register"></p>
         <button id="btn-dialog-fechar-pass">X</button>
     </dialog>
