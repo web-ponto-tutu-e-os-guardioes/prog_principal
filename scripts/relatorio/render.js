@@ -97,7 +97,7 @@ export function renderList() {
                         <p class="registro-details-latitude"><strong>Latitude:</strong> ${register.localizacao.latitude || 'Não possui latitude'}</p>
                         <p class="registro-details-longitude"><strong>Longitude:</strong> ${register.localizacao.longitude || 'Não possui longitude'}</p>
                         <br>
-                        <a href="${link}" target="_blank">Abrir localização no Google Maps</a>
+                        <a class="linkGoogle" href="${link}" target="_blank">Abrir localização no Google Maps</a>
                         <div id="map-${index}" class="map" style="height: 200px;"></div>  
                     </details>
 

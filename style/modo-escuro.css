@@ -30,3 +30,48 @@ body.dark-mode .calendar {
     background-color: #333;
     color: #fff;
 }
+
+body.dark-mode .data-hora {
+    background-color: #112D4E;
+}
+
+body.dark-mode #dialog-ponto, #dialog-ponto-pass {
+    background-color: #17406e;
+    color: white;
+}
+
+body.dark-mode #enunciado {
+    color: white;
+}
+
+body.dark-mode .toggle-details {
+    color: white;
+}
+
+body.dark-mode .registro-item {
+    background-color: #112D4E;
+}
+
+body.dark-mode .registro-detalhe {
+    background-color: #3f3f3f;
+}
+
+body.dark-mode p, summary {
+    color: white;
+}
+
+body.dark-mode #div-local {
+    color: rgb(241, 213, 213);
+}
+
+body.dark-mode .details-localização[open] {
+    background-color: #333;
+}
+
+body.dark-mode .linkGoogle {
+    color: white;
+}
+
+body.dark-mode .linkGoogle:hover {
+    color: #3F72AF;
+}
