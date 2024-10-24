@@ -3,8 +3,38 @@ import { setupEdit } from './edit.js';
 import { setupDelete } from './delete.js';
 import { toggleDetails } from './toggle.js';
 
+function filterByDate(registers, filterType) {
+    const now = new Date();
+    
+    if (filterType === 'last-week') {
+        const lastWeek = new Date();
+        lastWeek.setDate(now.getDate() - 7);
+        return registers.filter(register => {
+            const [dia, mes, ano] = register.data.split('/').map(Number);
+            const registerDate = new Date(ano, mes - 1, dia);
+            return registerDate >= lastWeek && registerDate <= now;
+        });
+    }
+    
+    if (filterType === 'last-month') {
+        const lastMonth = new Date();
+        lastMonth.setMonth(now.getMonth() - 1);
+        return registers.filter(register => {
+            const [dia, mes, ano] = register.data.split('/').map(Number);
+            const registerDate = new Date(ano, mes - 1, dia);
+            return registerDate >= lastMonth && registerDate <= now;
+        });
+    }
+
+    return registers;
+}
+
 export function renderList() {
-    const registers = getRegisters() || [];
+    const filter = document.getElementById('filter').value;
+    let registers = getRegisters() || [];
+    
+    registers = filterByDate(registers, filter);
+
     const registrosContainer = document.getElementById('registros-relatorio');
     registrosContainer.innerHTML = '';
 
@@ -19,19 +49,19 @@ export function renderList() {
             acc[date] = [];
         }
         acc[date].push(register);
-        return acc;        
+        return acc;
     }, {});
 
     const datasOrdenadas = Object.keys(registrosPorData).sort((a, b) => {
         const [diaA, mesA, anoA] = a.split('/').map(Number);
         const [diaB, mesB, anoB] = b.split('/').map(Number);
-    
+
         const dataA = new Date(anoA, mesA - 1, diaA);
         const dataB = new Date(anoB, mesB - 1, diaB);
-    
+
         return dataB - dataA;
     });
-    
+
     datasOrdenadas.forEach(date => {
         const divRegistro = document.createElement('div');
         divRegistro.classList.add('registro-item');
@@ -113,3 +143,5 @@ export function renderList() {
         });
     });
 }
+
+document.getElementById('filter').addEventListener('change', renderList);

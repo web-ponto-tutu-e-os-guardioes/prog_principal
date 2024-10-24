@@ -39,6 +39,12 @@
             <h1>Relatório de Registro de Pontos</h1>
             <p id="enunciado">( Clique em uma das seguintes datas )</p>
         </div>
+        <label id="labelFiltro" for="filter">Filtrar registros:</label>
+        <select id="filter">
+            <option value="all">Todos</option>
+            <option value="last-week">Última Semana</option>
+            <option value="last-month">Último Mês</option>
+        </select>
         <div id="registros-relatorio"></div>    
         <button onclick="window.location.href='./grafico.html'" id="btn-gerar-grafico">Gerar Gráfico</button>
     </main>
