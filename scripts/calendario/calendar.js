@@ -1,20 +1,12 @@
+import { getRegisters } from '../relatorio/getStorage.js';
+
 const header = document.querySelector(".calendar h3");
 const dates = document.querySelector(".dates");
 const navs = document.querySelectorAll("#prev, #next");
 
 const months = [
-  "Janeiro",
-  "Fevereiro",
-  "Março",
-  "Abril",
-  "Maio",
-  "Junho",
-  "Julho",
-  "Agosto",
-  "Setembro",
-  "Outubro",
-  "Novembro",
-  "Dezembro",
+  "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+  "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
 let date = new Date();
@@ -22,28 +14,50 @@ let month = date.getMonth();
 let year = date.getFullYear();
 
 function renderCalendar() {
-  // first day of the month
+  const registers = getRegisters();
+  
   const start = new Date(year, month, 1).getDay();
-  // last date of the month
+
   const endDate = new Date(year, month + 1, 0).getDate();
-  // last day of the month
+
   const end = new Date(year, month, endDate).getDay();
-  // last date of the previous month
+
   const endDatePrev = new Date(year, month, 0).getDate();
 
   let datesHtml = "";
 
+  function checkDayStatus(day) {
+    const formattedDate = `${String(day).padStart(2, '0')}/${String(month + 1).padStart(2, '0')}/${year}`;
+  
+    const dayRegisters = registers.filter(reg => 
+      reg.date === formattedDate || reg.data === formattedDate
+    );
+  
+    const hasEntrada = dayRegisters.some(reg => reg.type === 'entrada' || reg.tipo === 'entrada');
+    const hasSaida = dayRegisters.some(reg => reg.type === 'saida' || reg.tipo === 'saida');
+  
+    if (hasEntrada && hasSaida) {
+      return 'complete';
+    }
+  
+    return '';
+  }
+  
   for (let i = start; i > 0; i--) {
     datesHtml += `<li class="inactive">${endDatePrev - i + 1}</li>`;
   }
 
   for (let i = 1; i <= endDate; i++) {
-    let className =
-      i === date.getDate() &&
-      month === new Date().getMonth() &&
-      year === new Date().getFullYear()
-        ? ' class="today"'
-        : "";
+    let className = i === date.getDate() && month === new Date().getMonth() && year === new Date().getFullYear()
+      ? ' class="today"'
+      : '';
+  
+    const dayStatus = checkDayStatus(i);
+  
+    if (dayStatus === 'complete') {
+      className = ' class="complete"';
+    }
+  
     datesHtml += `<li${className}>${i}</li>`;
   }
 
@@ -55,7 +69,7 @@ function renderCalendar() {
   header.textContent = `${months[month]} ${year}`;
 }
 
-navs.forEach((nav) => {
+navs.forEach(nav => {
   nav.addEventListener("click", (e) => {
     const btnId = e.target.id;
 
@@ -78,3 +92,15 @@ navs.forEach((nav) => {
 });
 
 renderCalendar();
+
+const style = document.createElement('style');
+style.innerHTML = `
+  .complete {
+    background-color: green;
+  }
+  .today {
+    background-color: black;
+    color: white;
+  }
+`;
+document.head.appendChild(style);

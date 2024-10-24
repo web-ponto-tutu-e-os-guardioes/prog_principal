@@ -20,6 +20,16 @@ h1 {
 h3 {
   font-weight: 600;
 }
+.complete {
+  background-color: green;
+  border-radius: 50%; /* Isso faz com que o quadrado vire um círculo */
+  width: 10px; /* Ajuste o tamanho do círculo */
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Mantém o texto visível */
+}
 .calendar {
   margin: 0 auto;
   width: clamp(320px, 400px, 90%);
