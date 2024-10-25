@@ -8,6 +8,8 @@ document.getElementById("dia-mes-ano").textContent = getCurrentDate();
 
 const lastPoint = document.getElementById("dialog-last-register");
 
+printCurrentHour(document.getElementById("hora-min-seg")); // chamando de novo pra começar o contador de uma vez, em vez de esperar o setInterval
+
 setInterval(() => {
     lastPoint.textContent = getLastPoint();
 }, 1000);
