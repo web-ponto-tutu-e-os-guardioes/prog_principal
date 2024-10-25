@@ -98,9 +98,11 @@
 
         <label for="justificativa-pass">Justificativa:</label><br>
         <textarea id="justificativa-pass" placeholder="Digite sua justificativa"></textarea><br><br>
-        <label for="arquivo-pass">Anexar arquivo (PDF, imagens):</label><br>
-        <input type="file" id="arquivo-pass" accept=".pdf,.jpg,.jpeg,.png"><br><br>
 
+        <label for="arquivo-pass" class="custom-file-upload">Anexar arquivo (PDF, imagens):</label><br>
+        <input type="file" id="arquivo-pass" accept=".pdf,.jpg,.jpeg,.png,.txt"><br>
+        <br>
+        <span id="file-chosen">Nenhum arquivo escolhido</span>
         <button id="btn-dialog-bater-ponto-pass">Registrar ponto no passado</button>
         <p id="dialog-last-register"></p>
         <button id="btn-dialog-fechar-pass">X</button>

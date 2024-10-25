@@ -1,6 +1,6 @@
 import { getCurrentHour, getCurrentDate, formatarData } from '../utils/dateTime.js';
 import { getCurrentPosition } from './geolocation.js';
-import { getRegisterLocalStorage , saveRegisterLocalStorage } from '../utils/storage.js';
+import { getRegisterLocalStorage, saveRegisterLocalStorage } from '../utils/storage.js';
 import { showAlert } from '../components/alert.js';
 import { updateLastRegisterInfo, closeDialogPonto, closeDialogPontoPass } from '../components/dialog.js';
 import { generateUniqueId } from '../utils/id.js';
@@ -20,6 +20,13 @@ export async function handleRegister() {
         tipo: typeRegister.value,
         obs: inputObservacao.value
     };
+
+    // Verificar se já existe um ponto do mesmo tipo no mesmo dia
+    const existingPoints = getRegisterLocalStorage().filter(p => p.data === ponto.data && p.tipo === ponto.tipo);
+    if (existingPoints.length > 0) {
+        alert(`Você já registrou um ponto de tipo ${ponto.tipo} hoje.`);
+        return; // Impede o registro de um ponto duplicado
+    }
 
     saveRegisterLocalStorage(ponto);
     updateLastRegisterInfo(ponto);
@@ -45,6 +52,15 @@ export async function handlePastRegister() {
         return;
     }
 
+    const dataFormatada = formatarData(inputData);
+
+    // Verificar se já existe um ponto do mesmo tipo na data selecionada
+    const existingPoints = getRegisterLocalStorage().filter(p => p.data === dataFormatada && p.tipo === typeRegister.value);
+    if (existingPoints.length > 0) {
+        alert(`Você já registrou um ponto de tipo ${typeRegister.value} nessa data.`);
+        return; // Impede o registro de um ponto duplicado no passado
+    }
+
     let arquivoNome = null;
     let arquivoDados = null;
     if (arquivoInput.files.length > 0) {
@@ -55,7 +71,7 @@ export async function handlePastRegister() {
             arquivoDados = evento.target.result;
 
             const pontoPassado = {
-                data: formatarData(inputData),
+                data: dataFormatada,
                 hora: getCurrentHour(),
                 localizacao: userCurrentPosition,
                 id: generateUniqueId(),
@@ -65,9 +81,6 @@ export async function handlePastRegister() {
                 arquivoNome: arquivo?.name || null,
                 arquivoDados: arquivoDados || null
             };
-            
-
-            console.log(pontoPassado);
 
             saveRegisterLocalStorage(pontoPassado);
             updateLastRegisterInfo(pontoPassado);
@@ -78,10 +91,10 @@ export async function handlePastRegister() {
         leitorArquivo.readAsDataURL(arquivo);
     } else {
         const pontoPassado = {
-            data: formatarData(inputData),
+            data: dataFormatada,
             hora: getCurrentHour(),
             localizacao: userCurrentPosition,
-            id: getRegisterLocalStorage().length + 1,
+            id: generateUniqueId(),
             tipo: typeRegister.value,
             isPastRegister: true,
             obs: inputJustificativa.value,

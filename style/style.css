@@ -113,6 +113,132 @@ body {
     transform: scale(1.1);
 }
 
+#dialog-ponto,
+#dialog-ponto-pass {
+    padding: 30px;
+    border-radius: 15px;
+    margin: auto;
+    border: none;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #f8f9fa;
+    font-family: var(--fonte-poppins);
+    max-width: 400px;
+    text-align: center;
+}
+
+#dialog-ponto p, #dialog-ponto-pass p,
+#dialog-ponto label, #dialog-ponto-pass label {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #3F72AF;
+}
+
+#dialog-ponto select, #dialog-ponto-pass select,
+#input-observacao, #justificativa-pass {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid black;
+    margin-bottom: 15px;
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+#input-observacao, #justificativa-pass {
+    resize: none;
+}
+
+#arquivo-pass {
+    font-size: 0.95rem;
+    border: 1px solid black;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    width: 100%;
+    background-color: #fff;
+}
+
+#arquivo-pass {
+    padding: 15px;
+    margin-top: 20px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 2px solid #3F72AF;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #3F72AF;
+    font-size: 1.1rem;
+    font-family: var(--fonte-poppins);
+    font-weight: 500;
+    transition: transform 0.3s ease;
+}
+
+#file-chosen {
+    margin-left: 10px;
+    font-family: var(--fonte-poppins);
+    font-size: 1rem;
+    color: #333;
+}
+
+.custom-file-upload:hover {
+    transform: scale(1.05);
+    color: white;
+}
+
+#dialog-ponto button:not(#btn-dialog-fechar),
+#dialog-ponto-pass button:not(#btn-dialog-fechar-pass) {
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: #3F72AF;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: calc(100% - 20px);
+    margin-top: 10px;
+}
+
+#dialog-ponto button:not(#btn-dialog-fechar):hover,
+#dialog-ponto-pass button:not(#btn-dialog-fechar-pass):hover {
+    background-color: #2a4a78;
+    transform: scale(1.05);
+}
+
+#dialog-ponto-pass textarea {
+    min-height: 80px;
+}
+
+#dialog-ponto-pass label[for="data"], #dialog-ponto-pass label[for="justificativa-pass"] {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #3F72AF;
+}
+
+#dialog-last-register {
+    margin-top: 30px;
+}
+
+#dialog-ponto p#dialog-data, #dialog-ponto p#dialog-hora,
+#dialog-ponto-pass p#dialog-hora-pass {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+
 #relatorioButton, #btn-bater-ponto-pass, #btn-bater-ponto {
     background-color: var(--azul-claro);
     color: white;
@@ -128,54 +254,12 @@ body {
     margin-right: 30px;
 }
 
-#dialog-ponto p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-}
-
-#dialog-ponto select {
-    padding: 10px;
-    font-size: 1.3rem;
-    border-radius: 10px;
-    border: 1px solid black;
-    cursor: pointer;
-    margin-bottom: 15px;
-}
-
 #input-observacao {
     border-radius: 10px;
     border: 1px solid black;
     margin-bottom: 15px;
 }
 
-#btn-dialog-bater-ponto {
-    padding: 20px;
-    font-size: 1.3rem;
-    border-radius: 10px;
-    cursor: pointer;
-    border: 1px solid black;
-    margin-bottom: 15px;
-    background-color: rgb(22, 206, 22);
-    color: white;
-    font-weight: bold;
-    transition: transform 0.3s ease;
-}
-
-#btn-dialog-bater-ponto-pass {
-    padding: 10px;
-    font-size: 1.3rem;
-    border-radius: 10px;
-    cursor: pointer;
-    border: 1px solid black;
-    background-color: rgb(22, 206, 22);
-    color: white;
-    font-weight: normal;
-    transition: transform 0.3s ease;
-}
-
-#btn-dialog-bater-ponto:hover , #btn-dialog-bater-ponto-pass:hover {
-    transform: scale(1.05);
-}
 
 .div-input-observacao {
   margin: 5px;
@@ -197,19 +281,6 @@ body {
     font-size: 16px;
     padding: 12px;
     cursor: pointer;
-}
-
-#dialog-ponto, #dialog-ponto-pass {
-    padding: 20px;
-    border-radius: 10px;
-    margin: auto;
-    border: none;
-    box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.493);
-    background-color: #eceaea;
-}
-
-#dialog-ponto-pass {
-    font-size: 1.5rem;
 }
 
 /* Responsividade - Ajustes em telas pequenas */

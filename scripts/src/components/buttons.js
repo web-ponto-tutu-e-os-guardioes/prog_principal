@@ -11,14 +11,21 @@ export function setupButtonEvents() {
     const btnCloseAlertRegister = document.getElementById("alerta-registro-ponto-fechar");
     const btnBaterPonto = document.getElementById("btn-bater-ponto");
     const divAlertaRegistroPonto = document.getElementById("alerta-registro-ponto");
+    const fileInput = document.getElementById("arquivo-pass");
+    const fileChosen = document.getElementById("file-chosen");
 
-    btnBaterPontoPass.addEventListener("click", showDialogPontoPass);
-    btnDialogBaterPonto.addEventListener("click", handleRegister);
-    btnDialogBaterPontoPass.addEventListener("click", handlePastRegister);
-    btnDialogFechar.addEventListener("click", closeDialogPonto);
-    btnDialogFecharPass.addEventListener("click", closeDialogPontoPass);
-    btnBaterPonto.addEventListener("click", showDialogPonto);
-    btnCloseAlertRegister.addEventListener("click", () => 
-        closeAlert(divAlertaRegistroPonto)
-    );
+    if (btnBaterPontoPass) btnBaterPontoPass.addEventListener("click", showDialogPontoPass);
+    if (btnDialogBaterPonto) btnDialogBaterPonto.addEventListener("click", handleRegister);
+    if (btnDialogBaterPontoPass) btnDialogBaterPontoPass.addEventListener("click", handlePastRegister);
+    if (btnDialogFechar) btnDialogFechar.addEventListener("click", closeDialogPonto);
+    if (btnDialogFecharPass) btnDialogFecharPass.addEventListener("click", closeDialogPontoPass);
+    if (btnBaterPonto) btnBaterPonto.addEventListener("click", showDialogPonto);
+    if (btnCloseAlertRegister) {
+        btnCloseAlertRegister.addEventListener("click", () => closeAlert(divAlertaRegistroPonto));
+    }
+    if (fileInput && fileChosen) {
+        fileInput.addEventListener("change", function () {
+            fileChosen.textContent = this.files.length ? this.files[0].name : "Nenhum arquivo escolhido";
+        });
+    }
 }
