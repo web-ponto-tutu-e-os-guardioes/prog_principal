@@ -114,12 +114,12 @@ export function renderList() {
                     ${register.isEdited ? '<p style="color:orange;"><strong>Registro editado</strong></p>' : ''}
                     ${register.isPastRegister ? '<p style="color:red;"><strong>Ponto no passado</strong></p>' : ''}
                 </div>
+                <p class="alert-message" style="display:none; color:red; margin-top: 10px;"></p>
                 <div id="botoes-e-msg">
                     <div id="botoes-exc-edit">
                         <button class="editar">✏️</button>
                         <button class="excluir">❌</button>
                     </div>
-                    <p class="alert-message" style="display:none; color:red; margin-top: 10px;"></p>
                 </div>
             `;
 
