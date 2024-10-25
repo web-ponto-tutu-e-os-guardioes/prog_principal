@@ -3,6 +3,7 @@ import { getCurrentPosition } from './geolocation.js';
 import { getRegisterLocalStorage , saveRegisterLocalStorage } from '../utils/storage.js';
 import { showAlert } from '../components/alert.js';
 import { updateLastRegisterInfo, closeDialogPonto, closeDialogPontoPass } from '../components/dialog.js';
+import { generateUniqueId } from '../utils/id.js';
 
 const alertaRegistro = document.getElementById("alerta-registro-ponto");
 
@@ -15,7 +16,7 @@ export async function handleRegister() {
         data: getCurrentDate(),
         hora: getCurrentHour(),
         localizacao: userCurrentPosition,
-        id: 1,
+        id: generateUniqueId(),
         tipo: typeRegister.value,
         obs: inputObservacao.value
     };
@@ -57,13 +58,14 @@ export async function handlePastRegister() {
                 data: formatarData(inputData),
                 hora: getCurrentHour(),
                 localizacao: userCurrentPosition,
-                id: getRegisterLocalStorage().length + 1,
+                id: generateUniqueId(),
                 tipo: typeRegister.value,
                 isPastRegister: true,
                 obs: inputJustificativa.value,
-                arquivoNome: arquivo.name,
-                arquivoDados: arquivoDados
+                arquivoNome: arquivo?.name || null,
+                arquivoDados: arquivoDados || null
             };
+            
 
             console.log(pontoPassado);
 

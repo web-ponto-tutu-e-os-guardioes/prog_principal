@@ -1,6 +1,6 @@
 import { getRegisters, updateRegisters } from './getStorage.js';
 
-export function setupEdit(detalheRegistro, register, index, renderList) {
+export function setupEdit(detalheRegistro, register, renderList) {
     const editarButton = detalheRegistro.querySelector('.editar');
     editarButton.addEventListener('click', () => {
         detalheRegistro.innerHTML = `
@@ -30,20 +30,18 @@ export function setupEdit(detalheRegistro, register, index, renderList) {
         const form = detalheRegistro.querySelector('.form-edicao');
         form.addEventListener('submit', (event) => {
             event.preventDefault();
-        
+
             const now = new Date();
             const selectedTime = form.hora.value;
-
             const selectedDateTime = new Date(`1970-01-01T${selectedTime}`);
-            
             const currentTime = new Date();
             currentTime.setFullYear(1970, 0, 1);
-        
+
             if (selectedDateTime > currentTime) {
                 alert("O horário não pode ser no futuro. Insira um horário válido.");
                 return;
             }
-        
+
             const updatedRegister = {
                 ...register,
                 tipo: form['tipos-ponto'].value,
@@ -55,13 +53,15 @@ export function setupEdit(detalheRegistro, register, index, renderList) {
                 obs: form.obs.value,
                 isEdited: true
             };
-        
+
             const registers = getRegisters();
-            registers[index] = updatedRegister;
-            updateRegisters(registers);
-        
-            renderList();
-        });        
+            const registerIndex = registers.findIndex(r => r.id === register.id);
+            if (registerIndex !== -1) {
+                registers[registerIndex] = updatedRegister;
+                updateRegisters(registers);
+                renderList();
+            }
+        });
 
         const cancelarButton = detalheRegistro.querySelector('.cancelar-edicao');
         cancelarButton.addEventListener('click', () => {

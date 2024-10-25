@@ -52,17 +52,15 @@ function calcularDiferencaHoras(entrada, saida) {
     return `${horas} horas ${minutos} minutos`;
 }
 
-// Obter os dados para o gráfico
 let resultados = calcularHorasTrabalhadasPorDia();
-let labels = resultados.map(item => item.data);  // Datas
+let labels = resultados.map(item => item.data);
 let data = resultados.map(item => item.horasTrabalhadas);
 
-// Configuração e renderização do gráfico
 const ctx = document.getElementById('workHoursChart').getContext('2d');
 const workHoursChart = new Chart(ctx, {
-    type: 'bar',  // Tipo de gráfico
+    type: 'bar',
     data: {
-        labels: labels,  // Datas no eixo X
+        labels: labels,
         datasets: [{
             label: 'Horas Trabalhadas',
             data: data.map(item => {
@@ -77,7 +75,7 @@ const workHoursChart = new Chart(ctx, {
     options: {
         scales: {
             y: {
-                beginAtZero: true,  // Começar o eixo Y no zero
+                beginAtZero: true,
                 title: {
                     display: true,
                     text: 'Horas'

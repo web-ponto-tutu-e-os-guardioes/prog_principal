@@ -32,7 +32,7 @@ function filterByDate(registers, filterType) {
 export function renderList() {
     const filter = document.getElementById('filter').value;
     let registers = getRegisters() || [];
-    
+        
     registers = filterByDate(registers, filter);
 
     const registrosContainer = document.getElementById('registros-relatorio');
@@ -81,7 +81,7 @@ export function renderList() {
             return b.hora.localeCompare(a.hora);
         });
 
-        registrosPorData[date].forEach((register, index) => {
+        registrosPorData[date].forEach(register => {
             const link = `https://www.google.com/maps?q=${register.localizacao.latitude},${register.localizacao.longitude}`;
             const detalheRegistro = document.createElement('div');
             detalheRegistro.classList.add('registro-detalhe');
@@ -95,7 +95,7 @@ export function renderList() {
             }
 
             detalheRegistro.innerHTML = `
-                <div id="conteudo-${index}">
+                <div id="conteudo-${register.id}">
                     <p><strong>Tipo:</strong> ${register.tipo}</p>
                     <p><strong>Horário:</strong> ${register.hora || 'Horário não registrado'}</p>
 
@@ -106,7 +106,7 @@ export function renderList() {
                         <p class="registro-details-longitude"><strong>Longitude:</strong> ${register.localizacao.longitude || 'Não possui longitude'}</p>
                         <br>
                         <a class="linkGoogle" href="${link}" target="_blank">Abrir localização no Google Maps</a>
-                        <div id="map-${index}" class="map" style="height: 200px;"></div>  
+                        <div id="map-${register.id}" class="map" style="height: 200px;"></div>  
                     </details>
 
                     <p><strong>Observações:</strong> ${register.obs || 'Sem observações'}</p>
@@ -125,13 +125,13 @@ export function renderList() {
 
             detailsDiv.appendChild(detalheRegistro);
 
-            setupEdit(detalheRegistro, register, index, renderList);
+            setupEdit(detalheRegistro, register, renderList);
             setupDelete(detalheRegistro);
 
             const detailsElement = detalheRegistro.querySelector('details');
             detailsElement.addEventListener('toggle', function() {
                 if (detailsElement.open) {
-                    const mapDiv = detalheRegistro.querySelector(`#map-${index}`);
+                    const mapDiv = detalheRegistro.querySelector(`#map-${register.id}`);
                     const map = L.map(mapDiv).setView([register.localizacao.latitude, register.localizacao.longitude], 13);
 
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

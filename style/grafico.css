@@ -22,6 +22,12 @@ body {
     height: 100vh;
 }
 
+canvas {
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+}
+
 /* Layout principal */
 main {
     display: flex;
@@ -185,6 +191,11 @@ details[open] summary {
     margin-bottom: 20px;
     border: 2px solid darkslategray;
     border-radius: 5px;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
 }
 
 /* Responsividade para telas menores */
