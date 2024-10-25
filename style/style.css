@@ -200,7 +200,7 @@ body {
 }
 
 #dialog-ponto, #dialog-ponto-pass {
-    padding: 100px;
+    padding: 20px;
     border-radius: 10px;
     margin: auto;
     border: none;
@@ -210,4 +210,50 @@ body {
 
 #dialog-ponto-pass {
     font-size: 1.5rem;
+}
+
+/* Responsividade - Ajustes em telas pequenas */
+@media (max-width: 768px) {
+    .data-hora {
+        padding: 20px;
+        font-size: 2rem;
+    }
+
+    #div-btn-bater-ponto button {
+        padding: 15px;
+        font-size: 1.5rem;
+    }
+
+    #btn-dialog-bater-ponto, #btn-dialog-bater-ponto-pass {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    #alerta-registro-ponto {
+        bottom: 10px;
+        right: 10px;
+        padding: 15px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .data-hora p {
+        font-size: 1.5rem;
+    }
+
+    #div-btn-bater-ponto button {
+        padding: 10px;
+        font-size: 1.2rem;
+    }
+
+    #btn-dialog-bater-ponto, #btn-dialog-bater-ponto-pass {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    #alerta-registro-ponto {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
 }

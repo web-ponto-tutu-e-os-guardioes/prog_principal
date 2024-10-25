@@ -15,6 +15,7 @@
 body {
     font-family: var(--fonte-poppins);
     background-color: #f4f4f4;
+    height: 100vh;
 }
 
 header {
@@ -25,6 +26,7 @@ header {
     align-items: center;
     padding: 15px 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
 }
 
 .header-left {
@@ -60,11 +62,12 @@ header {
 .header-nav {
     display: flex;
     align-items: center;
+    gap: 20px;
 }
 
 .nav-link {
-    margin-right: 20px;
     text-decoration: none;
+    color: white;
 }
 
 #imagemModoCE {
@@ -121,4 +124,70 @@ header {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: row; /* Manter os itens na horizontal */
+        align-items: center;
+        justify-content: space-between; /* Garantir espaçamento entre os itens */
+        padding: 10px;
+    }
+
+    .header-left, .header-nav {
+        flex-direction: row; /* Organizar itens em linha */
+        align-items: center;
+    }
+
+    .header-left img {
+        height: 40px;
+        margin-right: 8px; /* Diminuir espaçamento entre logo e texto */
+    }
+
+    .header-title {
+        font-size: 1.3rem; /* Ajustar o tamanho da fonte */
+    }
+
+    .header-nav {
+        flex-direction: row; /* Itens do menu também na horizontal */
+        gap: 10px; /* Espaçamento entre os itens do menu */
+        margin-top: 0;
+    }
+
+    .nav-link, .theme-toggle-button, .history-button {
+        font-size: 0.9rem;
+        padding: 5px 10px; /* Ajustar os botões para tamanhos menores */
+    }
+
+    .history-button {
+        padding: 5px 10px;
+    }
+
+    .user-profile {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-left img {
+        height: 30px; /* Diminuir o tamanho da logo */
+    }
+
+    .header-title {
+        font-size: 1rem; /* Ajustar tamanho da fonte para caber */
+    }
+
+    .header-nav {
+        gap: 5px; /* Diminuir mais o espaço entre os itens no mobile */
+    }
+
+    .nav-link, .history-button {
+        padding: 5px; /* Reduzir o tamanho dos botões para se ajustar a telas pequenas */
+    }
+
+    .user-profile {
+        width: 35px;
+        height: 35px; /* Diminuir o tamanho do avatar */
+    }
 }
